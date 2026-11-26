@@ -1,0 +1,18 @@
+# Added by Wonder when it set up Git in this folder. Edit it freely.
+.env*
+!.env.example
+.DS_Store
+Thumbs.db
+node_modules/
+.next/
+.nuxt/
+.svelte-kit/
+.turbo/
+.vite/
+.cache/
+coverage/
+__pycache__/
+.venv/
+dist/
+build/
+out/
