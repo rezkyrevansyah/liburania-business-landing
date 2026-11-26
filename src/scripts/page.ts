@@ -65,11 +65,11 @@ tabs.forEach((tab, i) => {
 
 switches.forEach((btn) => btn.addEventListener('click', () => setSector(btn.dataset.switch as SectorId, 'kendali')));
 
-// Pintasan hero: pilih sektor, gulir ke solusi, pindahkan fokus ke judulnya.
+// Pintasan hero & daftar jenis usaha: pilih sektor, gulir ke solusi, pindahkan fokus ke judulnya.
 $$<HTMLAnchorElement>('[data-sector-link]').forEach((link) =>
   link.addEventListener('click', (e) => {
     e.preventDefault();
-    setSector(link.dataset.sectorLink as SectorId, 'hero');
+    setSector(link.dataset.sectorLink as SectorId, link.dataset.source ?? 'hero');
     const title = document.getElementById('solusi-title');
     title?.scrollIntoView({ behavior: reducedMotion.matches ? 'auto' : 'smooth' });
     title?.focus({ preventScroll: true });

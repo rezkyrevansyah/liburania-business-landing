@@ -163,6 +163,9 @@
   [data-panel].is-entering .panel-photo img {
     animation: rise 420ms var(--ease-out-soft) both;
   }
+  [data-panel].is-entering .panel-ui {
+    animation: rise 560ms var(--ease-out-soft) 90ms both;
+  }
   [data-panel].is-entering [data-step] {
     animation: rise 380ms var(--ease-out-soft) both;
     animation-delay: calc(80ms + var(--step, 0) * 70ms);

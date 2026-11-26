@@ -12,11 +12,10 @@ import { sectors } from '../data/sectors';
         tabindex="-1"
         class="max-w-[16ch] text-[clamp(2rem,1.2rem+2.6vw,3.25rem)] font-[740] outline-none"
       >
-        Cara kerja berbeda. Pilih solusi yang sesuai.
+        Solusi yang tersedia untuk usaha Anda.
       </h2>
       <p class="max-w-md text-muted lg:pb-1.5">
-        Setiap jenis usaha punya titik awal sendiri. Lihat siapa penggunanya, alur kerjanya, dan fitur yang
-        membedakannya.
+        Pilih jenis usaha untuk melihat fitur yang tersedia, siapa penggunanya, dan alur kerjanya.
       </p>
     </div>
 
@@ -68,23 +67,40 @@ import { sectors } from '../data/sectors';
             aria-labelledby={`panel-title-${s.id}`}
           >
             <div class="grid overflow-hidden rounded-[var(--radius-panel)] bg-navy lg:grid-cols-[1.05fr_1fr]">
-              <div class="panel-photo relative aspect-[4/3] overflow-hidden sm:aspect-[16/10] lg:aspect-auto lg:min-h-[560px]">
-                <Picture
-                  src={s.photo}
-                  alt={s.photoAlt}
-                  formats={['avif', 'webp']}
-                  fallbackFormat="jpg"
-                  widths={[640, 960, 1280]}
-                  sizes="(min-width: 1024px) 50vw, 100vw"
-                  class="photo absolute inset-0"
-                  style={`object-position:${s.panelCrop}`}
-                />
-                <p class="absolute top-4 left-4 rounded-[10px] bg-white/95 px-3 py-1.5 text-sm font-semibold backdrop-blur">
-                  Di depan pelanggan
-                </p>
-                <p class="absolute right-4 bottom-4 left-4 max-w-sm rounded-[14px] bg-navy/88 px-4 py-3 text-sm leading-snug text-white backdrop-blur">
-                  <span class="font-semibold text-cyan">Untuk</span> {s.audience}
-                </p>
+              <!-- Depan usaha (foto) dan sistem di baliknya (layar) dalam satu bidang: layar menempel di sudut, tepat di batas kolom sistem. -->
+              <div class="relative lg:min-h-[640px]">
+                <div class="panel-photo relative aspect-[5/4] overflow-hidden sm:aspect-[16/10] lg:absolute lg:inset-0 lg:aspect-auto">
+                  <Picture
+                    src={s.photo}
+                    alt={s.photoAlt}
+                    formats={['avif', 'webp']}
+                    fallbackFormat="jpg"
+                    widths={[640, 960, 1280]}
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    class="photo absolute inset-0"
+                    style={`object-position:${s.panelCrop}`}
+                  />
+                  <p class="absolute top-4 left-4 hidden max-w-[calc(100%-2rem)] sm:block rounded-[12px] bg-white/95 px-3.5 py-2 text-sm leading-snug text-navy backdrop-blur sm:max-w-sm">
+                    <span class="font-semibold text-blue-deep">Untuk</span> {s.audience}
+                  </p>
+                </div>
+
+                <figure class="panel-ui relative z-10 mx-4 -mt-10 sm:mx-8 sm:-mt-24 lg:absolute lg:right-0 lg:bottom-0 lg:m-0 lg:w-[94%]">
+                  <div class="rounded-[16px] bg-white/14 p-1.5 shadow-[0_-24px_60px_-24px_rgb(7_28_61/0.7)] ring-1 ring-white/25 backdrop-blur-md lg:rounded-none lg:rounded-tl-[22px] lg:p-2 lg:pr-0 lg:pb-0">
+                    <Picture
+                      src={s.ui}
+                      alt={s.uiAlt}
+                      formats={['avif', 'webp']}
+                      fallbackFormat="jpg"
+                      widths={[640, 960, 1280, 1586]}
+                      sizes="(min-width: 1024px) 48vw, 92vw"
+                      class="block h-auto w-full rounded-[11px] lg:rounded-none lg:rounded-tl-[15px]"
+                    />
+                  </div>
+                  <figcaption class="absolute -top-3.5 left-5 rounded-full bg-cyan px-3 py-1 text-xs font-bold text-navy shadow-sm lg:left-6">
+                    Di balik layar · {s.uiLabel}
+                  </figcaption>
+                </figure>
               </div>
 
               <div class="on-dark flex flex-col p-6 text-white sm:p-8 lg:p-12">
@@ -92,68 +108,61 @@ import { sectors } from '../data/sectors';
                   <span class="block text-[0.9375rem] font-semibold tracking-normal text-cyan">{s.product} · {s.poztixName}</span>
                   <span class="mt-3 block text-[clamp(1.625rem,1.1rem+1.5vw,2.375rem)] font-[720]">{s.headline}</span>
                 </h3>
-                <p class="mt-4 max-w-[46ch] text-white/75">{s.description}</p>
+                <p class="mt-4 mb-8 max-w-[46ch] text-white/75">{s.description}</p>
 
                 <div class="mt-8 border-t border-white/12 pt-7 lg:mt-auto">
-                  <p class="text-sm font-semibold text-white/60">Di baliknya</p>
-                  <ol class="relative mt-4 space-y-3.5 before:absolute before:top-4 before:bottom-4 before:left-[15px] before:w-px before:bg-white/15 before:content-['']">
-                    {s.flow.map((step, n) => (
-                      <li data-step class="relative flex items-center gap-4" style={`--step:${n}`}>
-                        <span class="relative grid size-8 shrink-0 place-items-center rounded-full border border-cyan/60 bg-navy text-sm font-bold text-cyan">
-                          {n + 1}
-                        </span>
-                        <span class="font-semibold">{step}</span>
+                  <p class="text-sm font-semibold text-white/60">Fitur yang tersedia</p>
+                  <ul class="mt-4 grid gap-x-6 gap-y-3 sm:grid-cols-2">
+                    {s.features.map((f) => (
+                      <li class="flex items-start gap-2.5 font-medium">
+                        <svg aria-hidden="true" viewBox="0 0 20 20" class="mt-1 size-4 shrink-0 text-cyan" fill="none" stroke="currentColor" stroke-width="2.4">
+                          <path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                        {f}
                       </li>
                     ))}
-                  </ol>
-                  <p class="mt-5 text-xs text-white/50">Ilustrasi alur: urutan kerja, bukan tampilan aplikasi.</p>
+                  </ul>
+                  <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center">
+                    <a
+                      href={contactUrlFor(s.moduleCode)}
+                      class="btn btn-primary"
+                      data-track="demo_click"
+                      data-section="solusi"
+                      data-sector={s.id}
+                      data-module={s.moduleCode}>{cta.demo}</a
+                    >
+                    <a
+                      href={s.detailUrl}
+                      class="font-semibold text-white underline underline-offset-4"
+                      data-track="detail_click"
+                      data-sector={s.id}
+                      data-module={s.moduleCode}>Lihat detail {s.poztixName}</a
+                    >
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div class="grid gap-x-8 gap-y-6 pt-8 md:grid-cols-3 md:pt-10">
-              {s.highlights.map((h) => (
-                <div class="border-t-2 border-navy pt-4">
-                  <p class="text-lg font-bold tracking-[-0.01em]">{h.title}</p>
-                  <p class="mt-1.5 text-[0.9875rem] text-muted">{h.text}</p>
-                </div>
-              ))}
-            </div>
-            <div class="mt-8 grid gap-8 rounded-[18px] bg-white p-5 sm:p-6 lg:grid-cols-2">
-              <div>
-                <p class="text-sm font-semibold text-blue">Fitur yang tersedia</p>
-                <ul class="mt-3 flex flex-wrap gap-2">
-                  {s.features.map((f) => (
-                    <li class="rounded-full border border-line px-3 py-1.5 text-[0.9375rem]">{f}</li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <p class="text-sm font-semibold text-blue">Cocok untuk</p>
-                <ul class="mt-3 flex flex-wrap gap-2">
-                  {s.useCases.map((u) => (
-                    <li class="rounded-full bg-paper px-3 py-1.5 text-[0.9375rem] font-medium">{u}</li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div class="mt-4 flex flex-col gap-5 rounded-[18px] bg-white p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
-              <div class="max-w-[52ch]">
-                <p class="text-muted">{s.caption}</p>
-                <a href={s.detailUrl} class="mt-2 inline-block font-semibold text-navy underline underline-offset-4" data-track="detail_click" data-sector={s.id} data-module={s.moduleCode}>
-                  Lihat detail {s.poztixName}
-                </a>
-              </div>
-              <a
-                href={contactUrlFor(s.moduleCode)}
-                class="btn btn-primary shrink-0"
-                data-track="demo_click"
-                data-section="solusi"
-                data-sector={s.id}
-                data-module={s.moduleCode}
-              >
-                {cta.demo}
-              </a>
+            <div class="mt-4 rounded-[18px] bg-white p-5 sm:p-6 lg:p-8">
+              <p class="text-sm font-semibold text-blue">Cocok untuk</p>
+              <ul class="mt-3 flex flex-wrap gap-2">
+                {s.useCases.map((u) => (
+                  <li class="rounded-full bg-paper px-3 py-1.5 text-[0.9375rem] font-medium">{u}</li>
+                ))}
+              </ul>
+
+              <p class="mt-8 text-sm font-semibold text-blue">Alur kerjanya</p>
+              <ol class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {s.flow.map((step, n) => (
+                  <li data-step class="flex items-center gap-3" style={`--step:${n}`}>
+                    <span class="grid size-8 shrink-0 place-items-center rounded-full border border-navy/30 text-sm font-bold">
+                      {n + 1}
+                    </span>
+                    <span class="font-semibold">{step}</span>
+                  </li>
+                ))}
+              </ol>
+              <p class="mt-4 text-xs text-muted">Tampilan layar adalah ilustrasi produk dengan data contoh. Alur menggambarkan urutan kerja.</p>
             </div>
           </article>
         ))

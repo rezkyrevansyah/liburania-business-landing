@@ -21,9 +21,9 @@ npm run preview   # lihat hasil build
 
 | ID | Aset | Spesifikasi | Dipakai di | Kondisi sekarang |
 | --- | --- | --- | --- | --- |
-| UI-01 | Screenshot aplikasi F&B (kasir atau Kitchen Display) | PNG, lebar minimal 1600 px, data dummy, status pesanan terbaca | Panel solusi F&B dan laporan pemilik F&B | Belum ada. Diganti alur "Ilustrasi alur" dan laporan "Data ilustrasi" |
-| UI-02 | Screenshot aplikasi Retail (katalog atau stok) | PNG, lebar minimal 1600 px, SKU dan kuantitas terbaca | Panel solusi Retail dan laporan pemilik Retail | Belum ada, diganti ilustrasi |
-| UI-03 | Screenshot aplikasi Jasa (kalender booking per staf) | PNG, lebar minimal 1600 px, nama staf dan layanan dummy | Panel solusi Jasa dan laporan pemilik Jasa | Belum ada, diganti ilustrasi |
+| UI-01 | Screenshot aplikasi F&B (kasir atau Kitchen Display) | PNG, lebar minimal 1600 px, data dummy, status pesanan terbaca | Panel solusi F&B dan laporan pemilik F&B | Terpasang di panel solusi (`ui-fnb-kitchen.png`). Laporan pemilik masih "Data ilustrasi" |
+| UI-02 | Screenshot aplikasi Retail (katalog atau stok) | PNG, lebar minimal 1600 px, SKU dan kuantitas terbaca | Panel solusi Retail dan laporan pemilik Retail | Terpasang di panel solusi (`ui-retail-stock.png`) |
+| UI-03 | Screenshot aplikasi Jasa (kalender booking per staf) | PNG, lebar minimal 1600 px, nama staf dan layanan dummy | Panel solusi Jasa dan laporan pemilik Jasa | Terpasang di panel solusi (`ui-service-calendar.png`) |
 | LOGO-01 | Logo resmi **Liburania Business** | SVG, atau PNG transparan versi terang dan gelap | Header dan footer | Memakai logo "Liburania" yang tersedia, lalu kata "Business" ditulis dengan HTML di sebelahnya |
 | LOGO-02 | Logo **Poztix** | SVG atau PNG transparan | Belum dipakai (menunggu keputusan penamaan) | Belum ada |
 

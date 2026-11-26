@@ -2,6 +2,9 @@ import type { ImageMetadata } from 'astro';
 import fnbPhoto from '../assets/images/fnb-business.png';
 import retailPhoto from '../assets/images/retail-business.png';
 import servicePhoto from '../assets/images/service-business.png';
+import fnbUi from '../assets/images/ui-fnb-kitchen.png';
+import retailUi from '../assets/images/ui-retail-stock.png';
+import serviceUi from '../assets/images/ui-service-calendar.png';
 
 // Identitas UI dipisahkan dari kode modul URL resmi (brief §9): fnb/retail/service ↔ fnb/tenant/visitor.
 export type SectorId = 'fnb' | 'retail' | 'service';
@@ -22,10 +25,12 @@ export interface Sector {
   headline: string;
   description: string;
   flow: [string, string, string, string];
-  highlights: { title: string; text: string }[];
-  caption: string;
   photo: ImageMetadata;
   photoAlt: string;
+  /** Ilustrasi layar produk (berlabel 'Ilustrasi produk · Data contoh' di dalam gambar). */
+  ui: ImageMetadata;
+  uiLabel: string;
+  uiAlt: string;
   /** object-position untuk crop di penjelajah solusi (berbeda dari hero). */
   panelCrop: string;
   owner: {
@@ -54,13 +59,10 @@ export const sectors: Sector[] = [
     description:
       'Hubungkan kasir, meja, pesanan dapur, resep, dan persediaan untuk membantu tim bekerja lebih teratur.',
     flow: ['Pesanan di kasir', 'Koordinasi dapur', 'Pengelolaan bahan & resep', 'Evaluasi penjualan'],
-    highlights: [
-      { title: 'POS & meja', text: 'Penjualan, menu, pembayaran, dan layanan makan di tempat.' },
-      { title: 'Kitchen Display', text: 'Status pesanan dan stasiun dapur dalam satu alur kerja.' },
-      { title: 'Resep & biaya bahan', text: 'Varian, modifier, bahan, dan komposisi resep tiap menu.' },
-    ],
-    caption: 'Pembelian, supplier, inventori, dan multi-outlet melengkapi kebutuhan operasional.',
     photo: fnbPhoto,
+    ui: fnbUi,
+    uiLabel: 'Kitchen Display',
+    uiAlt: 'Layar Pesanan Dapur Poztix F&B dengan kolom Baru, Diproses, dan Siap berisi pesanan per meja.',
     photoAlt: 'Staf kafe melayani pelanggan di meja kasir, dengan mesin kopi dan dapur di belakangnya.',
     panelCrop: '62% 50%',
     owner: {
@@ -100,13 +102,10 @@ export const sectors: Sector[] = [
       'Pemantauan stok',
       'Evaluasi penjualan & pengadaan',
     ],
-    highlights: [
-      { title: 'SKU & barcode', text: 'Kategori, harga, SKU, dan barcode setiap produk.' },
-      { title: 'Stok & opname', text: 'Pergerakan stok, opname, dan transfer antar-outlet.' },
-      { title: 'Pembelian & supplier', text: 'Purchase order, penerimaan barang, dan retur.' },
-    ],
-    caption: 'Kelola promo, pantau aktivitas kasir, dan evaluasi performa beberapa outlet.',
     photo: retailPhoto,
+    ui: retailUi,
+    uiLabel: 'Produk & stok',
+    uiAlt: 'Layar Produk & Stok Poztix Retail berisi daftar produk dengan SKU, harga, jumlah stok, dan status menipis atau habis.',
     photoAlt: 'Staf toko suvenir memindai barcode buku catatan di meja kasir, dengan rak mug dan tas kanvas di belakangnya.',
     panelCrop: '50% 40%',
     owner: {
@@ -146,13 +145,10 @@ export const sectors: Sector[] = [
       'Transaksi layanan/produk',
       'Rekap komisi & laporan',
     ],
-    highlights: [
-      { title: 'Booking per staf', text: 'Kalender, ketersediaan, dan slot untuk tiap jenis layanan.' },
-      { title: 'Paket layanan', text: 'Pengelolaan paket beserta sisa penggunaannya.' },
-      { title: 'Komisi & riwayat pelanggan', text: 'Komisi per layanan, profil, dan riwayat kunjungan.' },
-    ],
-    caption: 'Promo, membership, dan laporan membantu pengelolaan layanan di beberapa cabang.',
     photo: servicePhoto,
+    ui: serviceUi,
+    uiLabel: 'Jadwal per staf',
+    uiAlt: 'Layar Jadwal Staf Poztix Jasa & Layanan berisi kalender harian dengan booking pelanggan untuk tiap staf.',
     photoAlt: 'Resepsionis salon menyambut pelanggan di meja resepsionis, dengan kursi salon terlihat di ruangan belakang.',
     panelCrop: '30% 50%',
     owner: {
