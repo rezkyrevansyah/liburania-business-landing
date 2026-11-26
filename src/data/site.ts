@@ -3,15 +3,18 @@
 // sebelum tujuan aktual disetujui klien.
 export const contactUrl = 'https://liburania.com/business/kontak';
 
+// Formulir kontak mendukung parameter ?modul= (fnb | tenant | visitor) agar sales tahu modul yang diminati.
+export const contactUrlFor = (moduleCode: 'fnb' | 'tenant' | 'visitor') => `${contactUrl}?modul=${moduleCode}`;
+
 export const cta = {
   demo: 'Jadwalkan Demo',
   sales: 'Hubungi Tim Sales',
 } as const;
 
 export const seo = {
-  title: 'Sistem F&B, Retail & Jasa | Liburania Business',
+  title: 'Sistem POS F&B, Retail & Jasa | Liburania Business',
   description:
-    'Kelola transaksi, stok, jadwal staf, dan laporan sesuai kebutuhan usaha. Kenali solusi F&B, retail, dan jasa Liburania Business. Jadwalkan demo.',
+    'Sistem kasir (POS), stok, jadwal staf, dan laporan untuk usaha F&B, retail, dan jasa. Liburania System powered by Poztix. Jadwalkan demo.',
 };
 
 export const nav = [
@@ -26,4 +29,13 @@ export const officialLinks = [
   { label: 'Retail Management System', href: 'https://liburania.com/business/modul/tenant' },
   { label: 'Service Management System', href: 'https://liburania.com/business/modul/visitor' },
   { label: 'Kontak sales', href: contactUrl },
+];
+
+// Poin kepercayaan dan add-on: diambil dari halaman resmi Liburania Business (bukan klaim baru).
+export const trustPoints = ['Tanpa biaya pendaftaran', 'Setup cepat', 'Dukungan tim profesional'];
+
+export const addons = [
+  { label: 'Accounting', href: 'https://liburania.com/business/modul/accounting' },
+  { label: 'HR & Payroll', href: 'https://liburania.com/business/modul/hr' },
+  { label: 'Warehouse', href: 'https://liburania.com/business/modul/gudang' },
 ];

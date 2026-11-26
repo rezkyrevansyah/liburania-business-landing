@@ -1,0 +1,39 @@
+---
+import { Image } from 'astro:assets';
+import poztix from '../assets/images/poztix-logo.png';
+import { addons, trustPoints } from '../data/site';
+---
+
+<section aria-label="Tentang platform" class="border-y border-line bg-white">
+  <div
+    class="shell flex flex-col gap-5 py-6 lg:flex-row lg:items-center lg:justify-between lg:gap-10"
+  >
+    <p class="flex items-center gap-3 text-[0.9375rem] font-semibold text-muted">
+      Liburania System powered by
+      <Image src={poztix} alt="Poztix" widths={[160, 320]} sizes="96px" class="h-6 w-auto" />
+    </p>
+    <ul class="flex flex-wrap gap-x-6 gap-y-2 text-[0.9375rem] font-semibold">
+      {
+        trustPoints.map((point) => (
+          <li class="flex items-center gap-2">
+            <svg aria-hidden="true" viewBox="0 0 20 20" class="size-4 text-blue" fill="none" stroke="currentColor" stroke-width="2.4">
+              <path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+            {point}
+          </li>
+        ))
+      }
+    </ul>
+    <p class="text-sm text-muted">
+      Bisa ditambah:{' '}
+      {
+        addons.map((a, i) => (
+          <>
+            {i > 0 && ', '}
+            <a href={a.href} class="font-semibold text-navy underline-offset-4 hover:underline">{a.label}</a>
+          </>
+        ))
+      }
+    </p>
+  </div>
+</section>

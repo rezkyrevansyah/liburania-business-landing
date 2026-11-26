@@ -1,6 +1,7 @@
 ---
 import { Picture } from 'astro:assets';
 import fnbOrders from '../assets/images/problem-fnb-orders.png';
+import { sectors } from '../data/sectors';
 import retailStock from '../assets/images/problem-retail-stock.png';
 import serviceSchedule from '../assets/images/problem-service-schedule.png';
 
@@ -40,7 +41,7 @@ const scenes = [
 
     <ul class="mt-10 grid gap-x-6 gap-y-12 md:mt-14 md:grid-cols-3">
       {
-        scenes.map((scene) => (
+        scenes.map((scene, i) => ({ ...scene, challenges: sectors[i].challenges })).map((scene) => (
           <li>
             <figure>
               <div class="aspect-[4/3] overflow-hidden rounded-[var(--radius-photo)] bg-line">
@@ -59,6 +60,14 @@ const scenes = [
                 <span class="text-sm font-semibold text-blue">{scene.sector}</span>
                 <h3 class="mt-1.5 text-[1.375rem] font-bold md:text-2xl">{scene.title}</h3>
                 <p class="mt-2.5 text-muted">{scene.text}</p>
+                <ul class="mt-4 space-y-2 border-t border-line pt-4 text-[0.9375rem]">
+                  {scene.challenges.map((c) => (
+                    <li class="flex gap-2.5">
+                      <span aria-hidden="true" class="mt-[0.55em] size-1.5 shrink-0 rounded-full bg-blue" />
+                      {c}
+                    </li>
+                  ))}
+                </ul>
               </figcaption>
             </figure>
           </li>

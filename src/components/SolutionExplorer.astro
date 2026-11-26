@@ -1,6 +1,6 @@
 ---
 import { Image, Picture } from 'astro:assets';
-import { contactUrl, cta } from '../data/site';
+import { contactUrlFor, cta } from '../data/site';
 import { sectors } from '../data/sectors';
 ---
 
@@ -89,7 +89,7 @@ import { sectors } from '../data/sectors';
 
               <div class="on-dark flex flex-col p-6 text-white sm:p-8 lg:p-12">
                 <h3 id={`panel-title-${s.id}`}>
-                  <span class="block text-[0.9375rem] font-semibold tracking-normal text-cyan">{s.product}</span>
+                  <span class="block text-[0.9375rem] font-semibold tracking-normal text-cyan">{s.product} · {s.poztixName}</span>
                   <span class="mt-3 block text-[clamp(1.625rem,1.1rem+1.5vw,2.375rem)] font-[720]">{s.headline}</span>
                 </h3>
                 <p class="mt-4 max-w-[46ch] text-white/75">{s.description}</p>
@@ -119,10 +119,33 @@ import { sectors } from '../data/sectors';
                 </div>
               ))}
             </div>
-            <div class="mt-8 flex flex-col gap-5 rounded-[18px] bg-white p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
-              <p class="max-w-[52ch] text-muted">{s.caption}</p>
+            <div class="mt-8 grid gap-8 rounded-[18px] bg-white p-5 sm:p-6 lg:grid-cols-2">
+              <div>
+                <p class="text-sm font-semibold text-blue">Fitur yang tersedia</p>
+                <ul class="mt-3 flex flex-wrap gap-2">
+                  {s.features.map((f) => (
+                    <li class="rounded-full border border-line px-3 py-1.5 text-[0.9375rem]">{f}</li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <p class="text-sm font-semibold text-blue">Cocok untuk</p>
+                <ul class="mt-3 flex flex-wrap gap-2">
+                  {s.useCases.map((u) => (
+                    <li class="rounded-full bg-paper px-3 py-1.5 text-[0.9375rem] font-medium">{u}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div class="mt-4 flex flex-col gap-5 rounded-[18px] bg-white p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+              <div class="max-w-[52ch]">
+                <p class="text-muted">{s.caption}</p>
+                <a href={s.detailUrl} class="mt-2 inline-block font-semibold text-navy underline underline-offset-4" data-track="detail_click" data-sector={s.id} data-module={s.moduleCode}>
+                  Lihat detail {s.poztixName}
+                </a>
+              </div>
               <a
-                href={contactUrl}
+                href={contactUrlFor(s.moduleCode)}
                 class="btn btn-primary shrink-0"
                 data-track="demo_click"
                 data-section="solusi"

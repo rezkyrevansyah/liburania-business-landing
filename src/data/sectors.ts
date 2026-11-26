@@ -13,6 +13,12 @@ export interface Sector {
   product: string;
   audience: string;
   audienceShort: string;
+  /** Nama produk resmi di halaman modul (Poztix ...). */
+  poztixName: string;
+  detailUrl: string;
+  useCases: string[];
+  features: string[];
+  challenges: string[];
   headline: string;
   description: string;
   flow: [string, string, string, string];
@@ -39,6 +45,11 @@ export const sectors: Sector[] = [
     product: 'F&B System',
     audience: 'Restoran, kafe, dan outlet kuliner.',
     audienceShort: 'Restoran & kafe',
+    poztixName: "Poztix F&B",
+    detailUrl: 'https://liburania.com/business/modul/fnb',
+    useCases: ["Restoran", "Kafe", "Outlet kuliner", "Usaha multi-outlet"],
+    features: ["Smart POS & kasir", "Meja & dine-in", "Kitchen Display", "Menu, resep & modifier", "Inventori & stock opname", "Pembelian & supplier", "Laporan penjualan", "Multi-outlet"],
+    challenges: ["Transaksi, diskon, dan void sulit dipantau", "Stok bahan baku tidak akurat", "Pesanan dapur terlambat dan tidak sinkron", "Profit sebenarnya sulit diketahui"],
     headline: 'Dari pesanan ke dapur, operasional lebih selaras.',
     description:
       'Hubungkan kasir, meja, pesanan dapur, resep, dan persediaan untuk membantu tim bekerja lebih teratur.',
@@ -73,8 +84,13 @@ export const sectors: Sector[] = [
     moduleCode: 'tenant',
     tab: 'Retail',
     product: 'Retail Management System',
-    audience: 'Toko suvenir, merchandise, dan minimarket.',
+    audience: 'Toko suvenir, merchandise, minimarket, dan retail destinasi wisata.',
     audienceShort: 'Toko & suvenir',
+    poztixName: "Poztix Retail",
+    detailUrl: 'https://liburania.com/business/modul/tenant',
+    useCases: ["Souvenir & gift shop", "Fashion & merchandise", "Minimarket", "Retail hotel & resort", "Retail theme park, waterpark & museum"],
+    features: ["Smart POS & kasir", "Katalog, SKU & barcode", "Stok, opname & peringatan stok menipis", "Pembelian & supplier", "Promo, diskon & bundling", "Multi-outlet", "Laporan & produk terlaris", "Kontrol kasir & refund"],
+    challenges: ["Transaksi dan aktivitas kasir tidak terpantau", "Stok selisih atau produk kehabisan", "Pengadaan dan penerimaan barang tidak terstruktur", "Produk terlaris dan nilai persediaan sulit diketahui"],
     headline: 'Barang terjual, persediaan lebih mudah ditelusuri.',
     description:
       'Kelola kasir, katalog produk, stok, dan pembelian agar aktivitas toko tercatat lebih terstruktur.',
@@ -114,8 +130,13 @@ export const sectors: Sector[] = [
     moduleCode: 'visitor',
     tab: 'Jasa',
     product: 'Service Management System',
-    audience: 'Salon, barbershop, spa, dan wellness.',
+    audience: 'Salon, barbershop, spa, laundry, bengkel, dan bisnis jasa lain.',
     audienceShort: 'Salon & spa',
+    poztixName: "Poztix Jasa & Layanan",
+    detailUrl: 'https://liburania.com/business/modul/visitor',
+    useCases: ["Salon & barbershop", "Spa & wellness", "Laundry", "Bengkel", "Rental", "Service center"],
+    features: ["Booking & jadwal per staf", "POS layanan & produk", "Paket layanan", "Komisi & performa staf", "Riwayat pelanggan", "Promo, voucher & membership", "Laporan & setoran kasir", "Multi-outlet"],
+    challenges: ["Jadwal staf bertabrakan", "Layanan, produk, dan paket dicatat terpisah", "Komisi staf dihitung manual", "Data pelanggan dan tren penjualan sulit dianalisis"],
     headline: 'Jadwal staf tertata, layanan lebih mudah dipantau.',
     description:
       'Atur booking per staf, transaksi layanan dan produk, paket, komisi, serta riwayat pelanggan dalam satu sistem.',

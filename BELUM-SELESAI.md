@@ -49,7 +49,7 @@ Tujuh foto (IMG-01 sampai IMG-07) sudah lengkap dan terpasang.
 
 | Prioritas | Pertanyaan | Asumsi yang dipakai sekarang |
 | --- | --- | --- |
-| Tinggi | Identitas dominan: Liburania Business atau Poztix? | Liburania Business. Poztix belum disebut di halaman |
+| Tinggi | Identitas dominan: Liburania Business atau Poztix? | Liburania Business sebagai payung; Poztix disebut sebagai "powered by" (strip di bawah hero), nama produk modul, dan FAQ. Logo di `src/assets/images/poztix-logo.png` |
 | Tinggi | CTA ke formulir kontak atau langsung ke WhatsApp? | Semua CTA ke `https://liburania.com/business/kontak`, label "Jadwalkan Demo" dan "Hubungi Tim Sales" |
 | Tinggi | Bagaimana permintaan demo ditindaklanjuti? | Lewat tim sales, tanpa janji durasi, biaya, atau jadwal otomatis |
 | Tinggi | Target: usaha mandiri, kawasan wisata, atau keduanya? | Keduanya |
