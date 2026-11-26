@@ -1,0 +1,86 @@
+---
+import { Picture } from 'astro:assets';
+import fnbOrders from '../assets/images/problem-fnb-orders.png';
+import retailStock from '../assets/images/problem-retail-stock.png';
+import serviceSchedule from '../assets/images/problem-service-schedule.png';
+
+const scenes = [
+  {
+    sector: 'F&B',
+    title: 'Pesanan masuk. Dapur sudah tahu?',
+    text: 'Koordinasi pesanan dan bahan perlu tetap rapi saat pelayanan padat.',
+    photo: fnbOrders,
+    alt: 'Staf depan dan juru masak memeriksa pesanan bersama di meja saji dapur.',
+    crop: '45% 40%',
+  },
+  {
+    sector: 'Retail',
+    title: 'Barang terjual. Stok masih sesuai?',
+    text: 'Selisih stok dan pembelian yang terpisah menyulitkan pengawasan.',
+    photo: retailStock,
+    alt: 'Staf toko membawa clipboard sambil memeriksa rak mug dan tas kanvas.',
+    crop: '40% 45%',
+  },
+  {
+    sector: 'Jasa',
+    title: 'Booking bertambah. Jadwal tetap tertata?',
+    text: 'Jadwal, transaksi layanan, dan komisi perlu mudah ditelusuri.',
+    photo: serviceSchedule,
+    alt: 'Resepsionis salon menerima telepon sambil membuka buku janji temu.',
+    crop: '42% 40%',
+  },
+];
+---
+
+<section aria-labelledby="problem-title" class="bg-white py-16 md:py-24 lg:py-28">
+  <div class="shell">
+    <h2 id="problem-title" class="max-w-[19ch] text-[clamp(2rem,1.2rem+2.6vw,3.25rem)] font-[740]">
+      Saat usaha ramai, apa yang paling sulit Anda pantau?
+    </h2>
+
+    <ul class="mt-10 grid gap-x-6 gap-y-12 md:mt-14 md:grid-cols-3">
+      {
+        scenes.map((scene) => (
+          <li>
+            <figure>
+              <div class="aspect-[4/3] overflow-hidden rounded-[var(--radius-photo)] bg-line">
+                <Picture
+                  src={scene.photo}
+                  alt={scene.alt}
+                  formats={['avif', 'webp']}
+                  fallbackFormat="jpg"
+                  widths={[400, 640, 900]}
+                  sizes="(min-width: 768px) 33vw, 100vw"
+                  class="photo"
+                  style={`object-position:${scene.crop}`}
+                />
+              </div>
+              <figcaption class="mt-5 pr-4">
+                <span class="text-sm font-semibold text-blue">{scene.sector}</span>
+                <h3 class="mt-1.5 text-[1.375rem] font-bold md:text-2xl">{scene.title}</h3>
+                <p class="mt-2.5 text-muted">{scene.text}</p>
+              </figcaption>
+            </figure>
+          </li>
+        ))
+      }
+    </ul>
+
+    <a
+      href="#solusi"
+      class="group mt-14 flex flex-col gap-4 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between md:mt-20"
+    >
+      <span class="text-xl font-semibold tracking-[-0.015em] md:text-2xl">
+        Temukan solusi yang mengikuti cara usaha Anda bekerja.
+      </span>
+      <span
+        aria-hidden="true"
+        class="grid size-12 shrink-0 place-items-center rounded-full border border-line transition-colors duration-200 group-hover:border-navy group-hover:bg-navy group-hover:text-white"
+      >
+        <svg viewBox="0 0 20 20" class="size-5" fill="none" stroke="currentColor" stroke-width="2"
+          ><path d="M10 4v12m0 0l-5-5m5 5l5-5" stroke-linecap="round" stroke-linejoin="round"></path></svg
+        >
+      </span>
+    </a>
+  </div>
+</section>

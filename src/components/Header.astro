@@ -1,0 +1,35 @@
+---
+import Logo from './Logo.astro';
+import { contactUrl, cta, nav } from '../data/site';
+---
+
+<header
+  data-header
+  class="sticky top-0 z-40 border-b border-transparent bg-paper/85 backdrop-blur-md transition-colors duration-200 data-[scrolled]:border-line"
+>
+  <div class="shell flex h-16 items-center justify-between gap-6 md:h-[72px]">
+    <a href="#top" class="rounded-md" aria-label="Liburania Business, kembali ke atas">
+      <Logo />
+    </a>
+    <nav aria-label="Navigasi utama" class="hidden md:block">
+      <ul class="flex items-center gap-8 text-[0.9375rem] font-medium text-muted">
+        {
+          nav.map((item) => (
+            <li>
+              <a href={item.href} class="transition-colors hover:text-navy">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <a
+      href={contactUrl}
+      class="btn btn-primary min-h-11 px-4 text-[0.9375rem]"
+      data-header-cta
+      data-track="demo_click"
+      data-section="header">{cta.demo}</a
+    >
+  </div>
+</header>

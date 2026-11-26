@@ -1,0 +1,61 @@
+---
+import { Picture } from 'astro:assets';
+import consultation from '../assets/images/business-demo-consultation.png';
+import { contactUrl, cta } from '../data/site';
+
+const steps = [
+  { title: 'Ceritakan operasional Anda.', text: 'Pilih jenis usaha dan bagian yang ingin dibenahi.' },
+  { title: 'Lihat solusi yang relevan.', text: 'Diskusikan alur dan fitur melalui demo bersama tim.' },
+  { title: 'Bahas kebutuhan penerapan.', text: 'Tanyakan perangkat, paket, dan penyiapan yang sesuai.' },
+];
+---
+
+<section id="cara-kerja" aria-labelledby="demo-title" class="py-16 md:py-24 lg:py-28">
+  <div class="shell">
+    <div class="relative">
+      <div
+        class="aspect-[4/3] overflow-hidden rounded-[var(--radius-panel)] bg-line sm:aspect-[16/9] lg:aspect-auto lg:h-[640px]"
+      >
+        <Picture
+          src={consultation}
+          alt="Pemilik usaha dan konsultan berdiskusi di meja kafe di depan laptop."
+          formats={['avif', 'webp']}
+          fallbackFormat="jpg"
+          widths={[640, 1024, 1440, 1920]}
+          sizes="(min-width: 1232px) 1184px, 100vw"
+          class="photo"
+          style="object-position: 68% 45%"
+        />
+      </div>
+
+      <div
+        class="relative -mt-16 mx-3 rounded-[var(--radius-photo)] bg-white p-6 shadow-[0_24px_60px_-28px_rgb(7_28_61/0.35)] sm:mx-6 sm:p-8 lg:absolute lg:top-1/2 lg:left-10 lg:mx-0 lg:mt-0 lg:w-[440px] lg:-translate-y-1/2 lg:p-10"
+      >
+        <h2 id="demo-title" class="text-[clamp(1.875rem,1.3rem+1.8vw,2.625rem)] font-[740]">
+          Mulai dari kebutuhan usaha Anda.
+        </h2>
+        <ol class="mt-7 space-y-5">
+          {
+            steps.map((step, n) => (
+              <li class="grid grid-cols-[2rem_1fr] gap-x-4">
+                <span class="grid size-8 place-items-center rounded-full bg-navy text-sm font-bold text-white">
+                  {n + 1}
+                </span>
+                <div>
+                  <p class="font-bold">{step.title}</p>
+                  <p class="mt-1 text-[0.9875rem] text-muted">{step.text}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+        <a
+          href={contactUrl}
+          class="btn btn-primary mt-8 w-full sm:w-auto"
+          data-track="demo_click"
+          data-section="cara-kerja">{cta.demo}</a
+        >
+      </div>
+    </div>
+  </div>
+</section>

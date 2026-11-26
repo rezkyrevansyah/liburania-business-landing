@@ -1,0 +1,140 @@
+---
+import { Image, Picture } from 'astro:assets';
+import { contactUrl, cta } from '../data/site';
+import { sectors } from '../data/sectors';
+---
+
+<section id="solusi" aria-labelledby="solusi-title" class="py-16 md:py-24 lg:py-28">
+  <div class="shell">
+    <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
+      <h2
+        id="solusi-title"
+        tabindex="-1"
+        class="max-w-[16ch] text-[clamp(2rem,1.2rem+2.6vw,3.25rem)] font-[740] outline-none"
+      >
+        Cara kerja berbeda. Pilih solusi yang sesuai.
+      </h2>
+      <p class="max-w-md text-muted lg:pb-1.5">
+        Setiap jenis usaha punya titik awal sendiri. Lihat siapa penggunanya, alur kerjanya, dan fitur yang
+        membedakannya.
+      </p>
+    </div>
+
+    <!-- Tab hanya muncul jika JavaScript aktif; tanpa JS ketiga panel tampil berurutan. -->
+    <div
+      role="tablist"
+      data-tablist
+      aria-label="Pilih jenis usaha"
+      class="mt-10 hidden grid-cols-3 gap-2 rounded-[18px] border border-line bg-white/60 p-1.5 md:mt-12 [.js_&]:grid"
+    >
+      {
+        sectors.map((s, i) => (
+          <button
+            type="button"
+            role="tab"
+            id={`tab-${s.id}`}
+            data-tab={s.id}
+            aria-controls={`solusi-${s.id}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            tabindex={i === 0 ? 0 : -1}
+            class="group flex min-h-14 items-center justify-center gap-3 rounded-[13px] px-2 py-2 text-left transition-[background-color,box-shadow] duration-200 hover:bg-white aria-selected:bg-white aria-selected:shadow-[0_0_0_1.5px_var(--color-navy)] sm:justify-start sm:px-3"
+          >
+            <Image
+              src={s.photo}
+              alt=""
+              widths={[96]}
+              sizes="48px"
+              class="hidden size-10 shrink-0 rounded-[10px] object-cover sm:block md:size-12"
+              style={`object-position:${s.panelCrop}`}
+            />
+            <span class="min-w-0">
+              <span class="block text-base font-bold md:text-lg">{s.tab}</span>
+              <span class="hidden truncate text-sm text-muted group-aria-selected:text-navy/70 lg:block">
+                {s.audience.replace('.', '')}
+              </span>
+            </span>
+          </button>
+        ))
+      }
+    </div>
+
+    <div data-panels class="mt-6 space-y-16 md:mt-8 [.js_&]:grid [.js_&]:space-y-0">
+      {
+        sectors.map((s, i) => (
+          <article
+            id={`solusi-${s.id}`}
+            data-panel={s.id}
+            data-inactive={i === 0 ? undefined : ''}
+            aria-labelledby={`panel-title-${s.id}`}
+          >
+            <div class="grid overflow-hidden rounded-[var(--radius-panel)] bg-navy lg:grid-cols-[1.05fr_1fr]">
+              <div class="panel-photo relative aspect-[4/3] overflow-hidden sm:aspect-[16/10] lg:aspect-auto lg:min-h-[560px]">
+                <Picture
+                  src={s.photo}
+                  alt={s.photoAlt}
+                  formats={['avif', 'webp']}
+                  fallbackFormat="jpg"
+                  widths={[640, 960, 1280]}
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  class="photo absolute inset-0"
+                  style={`object-position:${s.panelCrop}`}
+                />
+                <p class="absolute top-4 left-4 rounded-[10px] bg-white/95 px-3 py-1.5 text-sm font-semibold backdrop-blur">
+                  Di depan pelanggan
+                </p>
+                <p class="absolute right-4 bottom-4 left-4 max-w-sm rounded-[14px] bg-navy/88 px-4 py-3 text-sm leading-snug text-white backdrop-blur">
+                  <span class="font-semibold text-cyan">Untuk</span> {s.audience}
+                </p>
+              </div>
+
+              <div class="on-dark flex flex-col p-6 text-white sm:p-8 lg:p-12">
+                <h3 id={`panel-title-${s.id}`}>
+                  <span class="block text-[0.9375rem] font-semibold tracking-normal text-cyan">{s.product}</span>
+                  <span class="mt-3 block text-[clamp(1.625rem,1.1rem+1.5vw,2.375rem)] font-[720]">{s.headline}</span>
+                </h3>
+                <p class="mt-4 max-w-[46ch] text-white/75">{s.description}</p>
+
+                <div class="mt-8 border-t border-white/12 pt-7 lg:mt-auto">
+                  <p class="text-sm font-semibold text-white/60">Di baliknya</p>
+                  <ol class="relative mt-4 space-y-3.5 before:absolute before:top-4 before:bottom-4 before:left-[15px] before:w-px before:bg-white/15 before:content-['']">
+                    {s.flow.map((step, n) => (
+                      <li data-step class="relative flex items-center gap-4" style={`--step:${n}`}>
+                        <span class="relative grid size-8 shrink-0 place-items-center rounded-full border border-cyan/60 bg-navy text-sm font-bold text-cyan">
+                          {n + 1}
+                        </span>
+                        <span class="font-semibold">{step}</span>
+                      </li>
+                    ))}
+                  </ol>
+                  <p class="mt-5 text-xs text-white/50">Ilustrasi alur: urutan kerja, bukan tampilan aplikasi.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid gap-x-8 gap-y-6 pt-8 md:grid-cols-3 md:pt-10">
+              {s.highlights.map((h) => (
+                <div class="border-t-2 border-navy pt-4">
+                  <p class="text-lg font-bold tracking-[-0.01em]">{h.title}</p>
+                  <p class="mt-1.5 text-[0.9875rem] text-muted">{h.text}</p>
+                </div>
+              ))}
+            </div>
+            <div class="mt-8 flex flex-col gap-5 rounded-[18px] bg-white p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
+              <p class="max-w-[52ch] text-muted">{s.caption}</p>
+              <a
+                href={contactUrl}
+                class="btn btn-primary shrink-0"
+                data-track="demo_click"
+                data-section="solusi"
+                data-sector={s.id}
+                data-module={s.moduleCode}
+              >
+                {cta.demo}
+              </a>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,55 @@
+---
+const faqs = [
+  {
+    q: 'Apakah sistem ini hanya untuk usaha di tempat wisata?',
+    a: 'Tidak harus. Halaman modul menjelaskan kebutuhan F&B, retail, dan berbagai bisnis jasa. Ceritakan jenis usaha Anda kepada tim untuk memastikan kecocokan solusi dan penerapannya.',
+  },
+  {
+    q: 'Apakah saya harus memakai ketiga modul?',
+    a: 'Solusi dapat dipilih berdasarkan kebutuhan operasional. Tim sales membantu memastikan modul dan paket yang sesuai untuk usaha Anda.',
+  },
+  {
+    q: 'Apakah mendukung beberapa outlet?',
+    a: 'Ketiga modul mencantumkan pengelolaan multi-outlet. Konfirmasikan kebutuhan cabang dan pengaturannya saat demo.',
+  },
+  {
+    q: 'Apakah pelanggan bisa booking sendiri lewat WhatsApp?',
+    a: 'Modul jasa dirancang untuk pencatatan booking oleh staf, termasuk permintaan yang masuk melalui telepon atau WhatsApp. Untuk booking mandiri atau integrasi WhatsApp otomatis, tanyakan langsung kepada tim.',
+  },
+  {
+    q: 'Bagaimana mengetahui biaya dan perangkat yang dibutuhkan?',
+    a: 'Hubungi tim sales untuk membahas kebutuhan usaha, pilihan modul, perangkat, dan rincian biaya yang berlaku.',
+  },
+];
+---
+
+<section id="faq" aria-labelledby="faq-title" class="border-t border-line py-16 md:py-24 lg:py-28">
+  <div class="shell grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+    <div class="lg:sticky lg:top-28 lg:self-start">
+      <h2 id="faq-title" class="max-w-[12ch] text-[clamp(2rem,1.2rem+2.6vw,3.25rem)] font-[740]">
+        Pertanyaan yang sering diajukan
+      </h2>
+      <p class="mt-5 max-w-sm text-muted">Belum menemukan jawabannya? Tim sales siap membantu.</p>
+    </div>
+    <div class="border-t border-navy">
+      {
+        faqs.map((item) => (
+          <details class="group border-b border-line">
+            <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between gap-6 py-5 text-lg font-semibold tracking-[-0.01em] [&::-webkit-details-marker]:hidden md:py-6">
+              {item.q}
+              <span
+                aria-hidden="true"
+                class="relative grid size-8 shrink-0 place-items-center rounded-full border border-line transition-colors group-open:border-navy group-open:bg-navy group-open:text-white"
+              >
+                <svg viewBox="0 0 16 16" class="size-3.5 transition-transform duration-200 group-open:rotate-45" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M8 2v12M2 8h12" stroke-linecap="round" />
+                </svg>
+              </span>
+            </summary>
+            <p class="max-w-[62ch] pb-6 text-muted">{item.a}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

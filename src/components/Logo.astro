@@ -1,0 +1,18 @@
+---
+interface Props {
+  tone?: 'color' | 'white';
+  class?: string;
+}
+const { tone = 'color', class: className } = Astro.props;
+const src = tone === 'white' ? '/logo-liburania-white.png' : '/logo-liburania.png';
+---
+
+<span class:list={['inline-flex items-center gap-2.5', className]}>
+  <img src={src} alt="Liburania" width="699" height="160" class="h-6 w-auto sm:h-7" />
+  <span
+    class:list={[
+      'border-l pl-2.5 text-[0.9375rem] leading-none font-semibold tracking-[-0.01em]',
+      tone === 'white' ? 'border-white/30 text-white/85' : 'border-line text-muted',
+    ]}>Business</span
+  >
+</span>
