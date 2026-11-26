@@ -1,0 +1,71 @@
+---
+import { pricingUrlFor, price, reliability } from '../data/site';
+import { sectors } from '../data/sectors';
+---
+
+<section id="harga" aria-labelledby="harga-title" class="py-16 md:py-24 lg:py-28">
+  <div data-reveal class="shell">
+    <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
+      <h2 id="harga-title" class="max-w-[19ch] text-[clamp(2rem,1.2rem+2.6vw,3.25rem)] font-[740]">
+        Sudah tahu apa yang Anda dapatkan? Sekarang saatnya melihat harganya.
+      </h2>
+      <p class="max-w-md text-muted lg:pb-1.5">
+        Mulai kelola bisnis secara lebih profesional tanpa biaya sistem yang berlebihan.
+      </p>
+    </div>
+
+    <ul class="mt-10 grid gap-4 md:mt-14 md:grid-cols-3">
+      {
+        sectors.map((s) => (
+          <li class="flex flex-col rounded-[var(--radius-photo)] border border-line bg-white p-6 sm:p-7">
+            <p class="text-sm font-semibold text-blue-deep">{s.tab}</p>
+            <p class="mt-1 text-xl font-bold">{s.product}</p>
+            <p class="mt-2 text-[0.9375rem] text-muted">{s.audience}</p>
+            <p class="mt-8 text-sm font-semibold text-muted">Mulai</p>
+            <p class="flex items-baseline gap-1.5">
+              <span class="text-[2.5rem] leading-none font-[760] tracking-[-0.03em] tabular-nums">{price}</span>
+              <span class="text-muted">/ bulan</span>
+            </p>
+            <a
+              href={pricingUrlFor(s.product)}
+              target="_blank"
+              rel="noopener"
+              class="btn btn-quiet mt-8 w-full"
+              data-track="pricing_click"
+              data-section="harga"
+              data-sector={s.id}>Konsultasikan paket</a
+            >
+          </li>
+        ))
+      }
+    </ul>
+    <p class="mt-6 text-muted">
+      Bayar sesuai kebutuhan bisnis Anda. Jangan membayar mahal untuk fitur yang tidak digunakan.
+    </p>
+
+    <div class="mt-14 grid gap-8 rounded-[var(--radius-panel)] bg-white p-6 sm:p-8 md:mt-20 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14 lg:p-12">
+      <h3 class="text-[clamp(1.625rem,1.1rem+1.5vw,2.375rem)] font-[720]">
+        Teknologi bisnis tidak harus mahal. Tapi harus bisa diandalkan.
+      </h3>
+      <ul class="grid gap-x-8 gap-y-4 sm:grid-cols-2">
+        {
+          reliability.map((item) => (
+            <li class="flex items-start gap-3 font-medium">
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 20 20"
+                class="mt-1 size-4 shrink-0 text-blue"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.4"
+              >
+                <path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              {item}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

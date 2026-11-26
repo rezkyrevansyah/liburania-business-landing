@@ -82,9 +82,38 @@ if (fromHash) setSector(fromHash, 'url');
 
 /* ---------- Header: garis bawah setelah halaman digulir ---------- */
 const header = document.querySelector<HTMLElement>('[data-header]');
-const onScroll = () => header?.toggleAttribute('data-scrolled', window.scrollY > 8);
+// Scrollspy: menu aktif = section navigasi terakhir yang sudah melewati 40% tinggi layar. Di hero: tidak ada.
+const navLinks = $$<HTMLAnchorElement>('[data-nav-link]');
+const navTargets = navLinks.map((a) => document.querySelector<HTMLElement>(a.hash));
+let activeNav = -1;
+const onScroll = () => {
+  header?.toggleAttribute('data-scrolled', window.scrollY > 8);
+  const line = window.innerHeight * 0.4;
+  let next = -1;
+  navTargets.forEach((el, i) => {
+    if (el && el.getBoundingClientRect().top <= line) next = i;
+  });
+  if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) next = navLinks.length - 1;
+  if (next === activeNav) return;
+  activeNav = next;
+  navLinks.forEach((a, i) => (i === next ? a.setAttribute('aria-current', 'location') : a.removeAttribute('aria-current')));
+};
 window.addEventListener('scroll', onScroll, { passive: true });
+window.addEventListener('resize', onScroll, { passive: true });
 onScroll();
+
+/* ---------- Reveal: tiap kelompok section muncul sekali saat terlihat ---------- */
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    for (const entry of entries) {
+      if (!entry.isIntersecting) continue;
+      entry.target.classList.add('is-visible');
+      revealObserver.unobserve(entry.target);
+    }
+  },
+  { rootMargin: '0px 0px -10% 0px' },
+);
+$$<HTMLElement>('[data-reveal]').forEach((el) => revealObserver.observe(el));
 
 /* ---------- CTA bawah ponsel ---------- */
 const bar = document.querySelector<HTMLElement>('[data-mobile-cta]');
@@ -118,6 +147,6 @@ document.addEventListener('click', (e) => {
   track(event, {
     sector: el.dataset.sector ?? current,
     section: el.dataset.section,
-    destination_type: event === 'sales_click' ? 'contact_form' : undefined,
+    destination_type: event.endsWith('_click') && el.getAttribute('href')?.startsWith('https://wa.me') ? 'whatsapp' : undefined,
   });
 });

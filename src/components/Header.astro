@@ -1,6 +1,6 @@
 ---
 import Logo from './Logo.astro';
-import { contactUrl, cta, nav } from '../data/site';
+import { demoUrl, cta, nav } from '../data/site';
 ---
 
 <header
@@ -16,7 +16,11 @@ import { contactUrl, cta, nav } from '../data/site';
         {
           nav.map((item) => (
             <li>
-              <a href={item.href} class="transition-colors hover:text-navy">
+              <a
+                href={item.href}
+                data-nav-link
+                class="relative py-1.5 transition-colors duration-200 after:absolute after:inset-x-0 after:-bottom-0.5 after:h-0.5 after:origin-left after:scale-x-0 after:rounded-full after:bg-blue after:transition-transform after:duration-200 after:content-[''] hover:text-navy aria-[current=location]:font-semibold aria-[current=location]:text-blue-deep aria-[current=location]:after:scale-x-100"
+              >
                 {item.label}
               </a>
             </li>
@@ -25,7 +29,8 @@ import { contactUrl, cta, nav } from '../data/site';
       </ul>
     </nav>
     <a
-      href={contactUrl}
+      href={demoUrl}
+      target="_blank" rel="noopener"
       class="btn btn-primary min-h-11 px-4 text-[0.9375rem]"
       data-header-cta
       data-track="demo_click"

@@ -1,41 +1,55 @@
-// Satu konfigurasi untuk seluruh CTA (brief §10, §12).
-// URL kontak saat ini membuka formulir sales, bukan WhatsApp — jangan ubah label ke "WhatsApp"
-// sebelum tujuan aktual disetujui klien.
-export const contactUrl = 'https://liburania.com/business/kontak';
+// Sumber konten: Materi_Lengkap_Liburania_Business.md (divalidasi owner).
+// Semua CTA ke WhatsApp tim Liburania Business, dengan pesan awal terisi.
+const whatsappNumber = '6281291235801';
+export const whatsappDisplay = '+62 812-9123-5801';
 
-// Formulir kontak mendukung parameter ?modul= (fnb | tenant | visitor) agar sales tahu modul yang diminati.
-export const contactUrlFor = (moduleCode: 'fnb' | 'tenant' | 'visitor') => `${contactUrl}?modul=${moduleCode}`;
+export const whatsappUrl = (text = 'Halo, saya ingin konsultasi kebutuhan bisnis dengan Liburania Business.') =>
+  `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+
+export const contactUrl = whatsappUrl();
+export const demoUrl = whatsappUrl('Halo, saya ingin menjadwalkan demo Liburania Business.');
+export const demoUrlFor = (product: string) => whatsappUrl(`Halo, saya ingin menjadwalkan demo ${product}.`);
+export const pricingUrlFor = (product: string) =>
+  whatsappUrl(`Halo, saya ingin konsultasi paket ${product} yang tepat untuk usaha saya.`);
 
 export const cta = {
   demo: 'Jadwalkan Demo',
-  sales: 'Hubungi Tim Sales',
+  consult: 'Konsultasi via WhatsApp',
+  solutions: 'Lihat Solusi',
+  pricing: 'Lihat Harga',
 } as const;
 
+export const price = 'Rp149.000';
+
 export const seo = {
-  title: 'Sistem POS F&B, Retail & Jasa | Liburania Business',
+  title: 'Sistem Kasir F&B, Retail & Jasa | Liburania Business',
   description:
-    'Sistem kasir (POS), stok, jadwal staf, dan laporan untuk usaha F&B, retail, dan jasa. Liburania System powered by Poztix. Jadwalkan demo.',
+    'Kelola penjualan, stok, jadwal staf, pelanggan, dan laporan bisnis untuk usaha F&B, retail, dan jasa. Mulai Rp149.000/bulan. Jadwalkan demo.',
 };
 
 export const nav = [
   { label: 'Solusi', href: '#solusi' },
-  { label: 'Cara Kerja', href: '#cara-kerja' },
+  { label: 'Manfaat', href: '#manfaat' },
+  { label: 'Harga', href: '#harga' },
   { label: 'FAQ', href: '#faq' },
 ];
 
-export const officialLinks = [
-  { label: 'Liburania Business', href: 'https://liburania.com/business#modul' },
-  { label: 'F&B System', href: 'https://liburania.com/business/modul/fnb' },
-  { label: 'Retail Management System', href: 'https://liburania.com/business/modul/tenant' },
-  { label: 'Service Management System', href: 'https://liburania.com/business/modul/visitor' },
-  { label: 'Kontak sales', href: contactUrl },
+// "Teknologi bisnis tidak harus mahal. Tapi harus bisa diandalkan."
+export const reliability = [
+  'Fitur disesuaikan dengan jenis bisnis',
+  'Sistem terintegrasi untuk operasional',
+  'Dashboard dan laporan bisnis',
+  'Mendukung satu maupun banyak outlet',
+  'Struktur biaya transparan',
+  'Tim support yang dapat dihubungi',
+  'Pengembangan dan maintenance berkelanjutan',
 ];
 
-// Poin kepercayaan dan add-on: diambil dari halaman resmi Liburania Business (bukan klaim baru).
-export const trustPoints = ['Tanpa biaya pendaftaran', 'Setup cepat', 'Dukungan tim profesional'];
-
-export const addons = [
-  { label: 'Accounting', href: 'https://liburania.com/business/modul/accounting' },
-  { label: 'HR & Payroll', href: 'https://liburania.com/business/modul/hr' },
-  { label: 'Warehouse', href: 'https://liburania.com/business/modul/gudang' },
+export const controls = [
+  { title: 'Kontrol penjualan', text: 'Pantau omzet dan transaksi secara terstruktur.' },
+  { title: 'Kontrol persediaan', text: 'Pantau stok barang, bahan baku, dan pergerakannya.' },
+  { title: 'Kontrol operasional', text: 'Pantau kasir, staf, dapur, jadwal, dan pelayanan.' },
+  { title: 'Kontrol keuangan bisnis', text: 'Gunakan informasi penjualan dan biaya operasional untuk mengambil keputusan.' },
+  { title: 'Kontrol karyawan', text: 'Pantau aktivitas, performa, dan produktivitas.' },
+  { title: 'Kontrol multi-cabang', text: 'Kelola dan evaluasi outlet dalam sistem terintegrasi.' },
 ];

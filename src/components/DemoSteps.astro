@@ -1,7 +1,7 @@
 ---
 import { Picture } from 'astro:assets';
 import consultation from '../assets/images/business-demo-consultation.png';
-import { contactUrl, cta } from '../data/site';
+import { demoUrl, cta } from '../data/site';
 
 const steps = [
   { title: 'Ceritakan operasional Anda.', text: 'Pilih jenis usaha dan bagian yang ingin dibenahi.' },
@@ -11,7 +11,7 @@ const steps = [
 ---
 
 <section id="cara-kerja" aria-labelledby="demo-title" class="py-16 md:py-24 lg:py-28">
-  <div class="shell">
+  <div data-reveal class="shell">
     <div class="relative">
       <div
         class="aspect-[4/3] overflow-hidden rounded-[var(--radius-panel)] bg-line sm:aspect-[16/9] lg:aspect-auto lg:h-[640px]"
@@ -50,7 +50,9 @@ const steps = [
           }
         </ol>
         <a
-          href={contactUrl}
+          href={demoUrl}
+          target="_blank"
+          rel="noopener"
           class="btn btn-primary mt-8 w-full sm:w-auto"
           data-track="demo_click"
           data-section="cara-kerja">{cta.demo}</a

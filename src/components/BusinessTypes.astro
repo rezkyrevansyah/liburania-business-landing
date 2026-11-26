@@ -1,5 +1,5 @@
 ---
-import { contactUrl } from '../data/site';
+import { contactUrl, price } from '../data/site';
 import { sectors } from '../data/sectors';
 import { businessGroups, type BusinessIconId } from '../data/businesses';
 
@@ -8,18 +8,14 @@ const icons: Record<BusinessIconId, string> = {
   coffee: 'M4 8h11v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V8Zm11 1.5h2a2.5 2.5 0 0 1 0 5h-2M7 4.5c0 .8.6 1.2.6 2M11 4.5c0 .8.6 1.2.6 2',
   croissant: 'M5 15c-1.5-2.5 0-6.5 4-8.5 2.5-1.2 5.5-1.2 8 0 4 2 5.5 6 4 8.5-1.5 2.2-5 2-8 2s-6.5.2-8-2ZM9.5 7l1 10M14.5 7l-1 10',
   flame: 'M12 3.5c2.5 2.8 5.5 5.4 5.5 9.5a5.5 5.5 0 1 1-11 0c0-2.3 1-4.3 2.5-6 .2 1.7 1.1 2.5 2 2.5-.2-2.2.3-4.2 1-6Z',
-  building: 'M5 20V5.5A1.5 1.5 0 0 1 6.5 4h11A1.5 1.5 0 0 1 19 5.5V20M3 20h18M9 8h1.5M13.5 8H15M9 12h1.5M13.5 12H15M10.5 20v-4h3v4',
   gift: 'M4 10h16v10H4V10Zm-1-3h18v3H3V7Zm9 0v13M12 7c0-2-1.5-3.5-3-3.5S6.5 4.7 6.5 6 8 7 12 7Zm0 0c0-2 1.5-3.5 3-3.5S17.5 4.7 17.5 6 16 7 12 7Z',
   shirt: 'M8.5 4.5 5 6.5l-2 4 3 1.5v8h12v-8l3-1.5-2-4-3.5-2a3.5 3.5 0 0 1-7 0Z',
   store: 'M3.5 9.5 5 4.5h14l1.5 5M4 9.5a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0M5.5 12v7.5h13V12M10 19.5v-4.5h4v4.5',
   bag: 'M6 8h12l1 12H5L6 8Zm3 0V6.5a3 3 0 0 1 6 0V8',
-  compass: 'M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.2-11.2-1.8 4.6-4.6 1.8 1.8-4.6 4.6-1.8Z',
   scissors: 'M6 7a2.5 2.5 0 1 0 0 .01M6 17a2.5 2.5 0 1 0 0 .01M8.2 8.2 19 17M8.2 15.8 19 7',
   sparkles: 'M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9L12 3Zm6 12 .8 2.2L21 18l-2.2.8L18 21l-.8-2.2L15 18l2.2-.8L18 15Z',
   laundry: 'M5 3.5h14v17H5v-17Zm0 4.5h14M8.5 5.75h.01M11.5 5.75h.01M12 17a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z',
   wrench: 'M14.7 6.3a4.5 4.5 0 0 0-5.9 5.9l-4.8 4.8a1.5 1.5 0 1 0 2.1 2.1l4.8-4.8a4.5 4.5 0 0 0 5.9-5.9l-2.6 2.6-2.1-2.1 2.6-2.6Z',
-  clock: 'M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm0-12v4.5l3 1.8',
-  laptop: 'M5 6h14v9H5V6Zm-2 12h18',
 };
 
 // Satu warna aksen per modul: garis atas kolom dan ikon.
@@ -30,14 +26,14 @@ const accent = {
 } as const;
 ---
 
-<section id="jenis-bisnis" aria-labelledby="business-types-title" class="py-16 md:py-24 lg:py-28">
-  <div class="shell">
+<section id="jenis-bisnis" aria-labelledby="business-types-title" class="pt-16 md:pt-24 lg:pt-28">
+  <div data-reveal class="shell">
     <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
       <h2 id="business-types-title" class="max-w-[16ch] text-[clamp(2rem,1.2rem+2.6vw,3.25rem)] font-[740]">
         Usaha Anda termasuk yang mana?
       </h2>
       <p class="max-w-md text-muted lg:pb-1.5">
-        Dari kuliner, toko, jasa, hingga destinasi wisata. Pilih jenis usaha untuk melihat solusi yang relevan.
+        Pilih jenis usaha untuk melihat solusi yang relevan.
       </p>
     </div>
 
@@ -47,7 +43,7 @@ const accent = {
           <div>
             <div class={`h-1 w-full rounded-full ${accent[s.id].rule}`} aria-hidden="true" />
             <h3 class="mt-5 text-2xl font-bold">{s.tab}</h3>
-            <p class="mt-1 text-[0.9375rem] text-muted">{s.poztixName}</p>
+            <p class="mt-1 text-[0.9375rem] text-muted">Mulai {price} / bulan</p>
             <ul class="mt-5 divide-y divide-line border-y border-line">
               {businessGroups[s.id].map((b) => (
                 <li>
@@ -55,16 +51,15 @@ const accent = {
                     href={`#solusi-${s.id}`}
                     data-sector-link={s.id}
                     data-source="jenis_bisnis"
-                    class="group -mx-3 flex items-center gap-4 rounded-xl px-3 py-3.5 transition-colors duration-200 hover:bg-white"
+                    class="group -mx-3 flex items-center gap-4 rounded-xl px-3 py-2.5 transition-colors duration-200 hover:bg-white"
                   >
-                    <span aria-hidden="true" class={`grid size-10 shrink-0 place-items-center rounded-[12px] ${accent[s.id].chip}`}>
+                    <span aria-hidden="true" class={`grid size-9 shrink-0 place-items-center rounded-[10px] ${accent[s.id].chip}`}>
                       <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                         <path d={icons[b.icon]} />
                       </svg>
                     </span>
                     <span class="min-w-0 flex-1">
                       <span class="block font-semibold leading-snug">{b.name}</span>
-                      <span class="block text-sm text-muted">{b.need}</span>
                     </span>
                     <svg aria-hidden="true" viewBox="0 0 16 16" class="size-4 shrink-0 text-muted opacity-0 transition-[opacity,transform] duration-200 group-hover:translate-x-0.5 group-hover:text-navy group-hover:opacity-100" fill="none" stroke="currentColor" stroke-width="2">
                       <path d="M3.5 8h9m0 0L9 4.5M12.5 8 9 11.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -78,15 +73,16 @@ const accent = {
       }
     </div>
 
-    <p class="mt-10 max-w-[68ch] text-muted md:mt-12">
-      Punya lebih dari satu jenis usaha, misalnya kafe yang menjual biji kopi atau resort dengan restoran dan spa?
-      Pilih modul untuk tiap unit usaha, lalu{' '}
+    <p class="mt-10 text-muted md:mt-12">
+      Jenis usaha Anda belum ada di daftar?{' '}
       <a
         href={contactUrl}
+        target="_blank"
+        rel="noopener"
         class="font-semibold text-navy underline underline-offset-4"
-        data-track="sales_click"
-        data-section="jenis-bisnis">ceritakan kebutuhan Anda kepada tim</a
-      >. Kebutuhan khusus seperti rental berbasis durasi dicocokkan saat demo.
+        data-track="consult_click"
+        data-section="jenis-bisnis">Konsultasikan kebutuhan bisnis Anda</a
+      >.
     </p>
   </div>
 </section>

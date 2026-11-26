@@ -147,6 +147,12 @@
     clip-path: inset(0 0 0 0 round var(--radius-photo));
   }
 }
+@keyframes settle {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
 @media (prefers-reduced-motion: no-preference) {
   .hero-rise {
     animation: rise 700ms var(--ease-out-soft) both;
@@ -158,20 +164,58 @@
   }
 }
 
-/* Panel solusi: transisi saat pengunjung mengganti tab. */
+/* Panel solusi: pergantian tab singkat (≤240 ms, geser 6 px) agar terasa responsif, bukan pertunjukan. */
 @media (prefers-reduced-motion: no-preference) {
-  [data-panel].is-entering .panel-photo img {
-    animation: rise 420ms var(--ease-out-soft) both;
-  }
-  [data-panel].is-entering .panel-ui {
-    animation: rise 560ms var(--ease-out-soft) 90ms both;
-  }
-  [data-panel].is-entering [data-step] {
-    animation: rise 380ms var(--ease-out-soft) both;
-    animation-delay: calc(80ms + var(--step, 0) * 70ms);
-  }
+  [data-panel].is-entering,
   [data-owner-panel].is-entering {
-    animation: rise 360ms var(--ease-out-soft) both;
+    animation: settle 220ms var(--ease-out-soft) both;
+  }
+
+  /* Reveal section: satu kelompok sekaligus, sekali saja. Tanpa JS konten tetap terlihat. */
+  .js [data-reveal] {
+    transition:
+      opacity 420ms var(--ease-out-soft),
+      transform 420ms var(--ease-out-soft);
+  }
+  .js [data-reveal]:not(.is-visible) {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+}
+
+/* FAQ: tinggi panel ikut bertransisi saat dibuka DAN ditutup (Chrome/Edge 131+).
+   Browser lain: jawaban cukup memudar saat dibuka. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (interpolate-size: allow-keywords) {
+    details {
+      interpolate-size: allow-keywords;
+    }
+    details::details-content {
+      block-size: 0;
+      overflow-y: clip;
+      opacity: 0;
+      transition:
+        block-size 340ms var(--ease-out-soft),
+        opacity 260ms ease,
+        content-visibility 340ms allow-discrete;
+    }
+    details[open]::details-content {
+      block-size: auto;
+      opacity: 1;
+    }
+    details > p {
+      transform: translateY(-6px);
+      transition: transform 340ms var(--ease-out-soft);
+    }
+    details[open] > p {
+      transform: none;
+    }
+  }
+  @supports not (interpolate-size: allow-keywords) {
+    details[open] > p {
+      animation: settle 260ms var(--ease-out-soft) both;
+    }
   }
 }
 

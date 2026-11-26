@@ -2,6 +2,8 @@
 
 Status per 26 November 2026. Halaman sudah bisa dijalankan dan di-build, tetapi beberapa aset dan keputusan klien masih dibutuhkan sebelum siap rilis.
 
+> **Pembaruan 26 Nov 2026 (materi owner):** konten mengikuti `Materi_Lengkap_Liburania_Business.md`. Poztix tidak disebut lagi (logo pada ilustrasi layar ditutup; master di `assets/image/` masih memuat logo Poztix). Semua CTA ke WhatsApp `+62 812-9123-5801` dengan pesan terisi. Harga mulai Rp149.000/bulan ditampilkan. FAQ memakai 8 Q&A owner. Konteks destinasi wisata, add-on, dan klaim "tanpa biaya pendaftaran" dihapus karena tidak ada di materi owner. Email kontak belum tersedia (materi owner masih `[EMAIL]`).
+
 ## Cara menjalankan
 
 Butuh Node.js 22.23 atau lebih baru.
@@ -65,8 +67,7 @@ Tujuh foto (IMG-01 sampai IMG-07) sudah lengkap dan terpasang.
 
 - [ ] **URL produksi:** isi `site` di `astro.config.mjs`. Canonical dan `og:url` otomatis aktif setelahnya (lihat `src/layouts/Base.astro`). Tag `og:image` belum ada; tambahkan setelah gambar Open Graph tersedia.
 - [ ] **Analytics:** pasang tag yang disetujui (misalnya GTM atau GA4). Event `demo_click`, `sales_click`, dan `sector_select` sudah dikirim ke `window.dataLayer` jika tersedia (`src/scripts/page.ts`).
-- [ ] **Kontras link:** "Temukan solusi untuk usaha Anda" berwarna biru `#0B6CFF` di atas latar `#F8F7F3`, kontrasnya 4,26:1 (standar 4,5:1). Ganti teks link ke `text-blue-deep`.
-- [ ] **Pengujian lebar 768 px (tablet):** baru diuji di 1440 px dan 390 px.
+- [ ] **Pengujian lebar 768 px (tablet):** sudah diuji di 1440, 1070 × 631, dan 390 px.
 - [ ] **Performa:** ukur LCP dan CLS pada build produksi (sasaran LCP ≤ 2,5 detik, CLS ≤ 0,1). Belum diukur.
 - [ ] **Deploy Vercel:** project siap (preset Astro, build `npm run build`, output `dist`), tetapi belum di-deploy.
 - [ ] **Font:** klien menyukai Plus Jakarta Sans dan Montserrat. Saat ini hanya Plus Jakarta Sans. Jika Montserrat ingin dipakai untuk judul, ganti token `--font-sans` atau tambahkan token baru di `src/styles/global.css`.

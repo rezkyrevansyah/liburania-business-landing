@@ -1,0 +1,66 @@
+---
+import { cta } from '../data/site';
+
+// Materi owner: "Gratis Belum Tentu Hemat. Mahal Belum Tentu Tepat."
+const options = [
+  {
+    label: 'Sistem yang katanya gratis',
+    questions: [
+      'Bagaimana keamanan dan kepemilikan data?',
+      'Ada dukungan teknis saat bermasalah?',
+      'Siapa yang menangani maintenance dan pembaruan?',
+      'Semua fitur yang dibutuhkan tersedia?',
+    ],
+    verdict: 'Jangan hanya melihat biaya awal.',
+  },
+  {
+    label: 'Sistem yang terlalu mahal',
+    questions: ['Semua fitur benar-benar dibutuhkan?', 'Biaya sebanding dengan manfaat?', 'Sesuai skala bisnis?'],
+    verdict: 'Jangan membayar mahal untuk fitur yang belum tentu digunakan.',
+  },
+];
+---
+
+<section aria-labelledby="positioning-title" class="border-t border-line py-16 md:py-24">
+  <div data-reveal class="shell">
+    <h2 id="positioning-title" class="max-w-[18ch] text-[clamp(2rem,1.2rem+2.6vw,3.25rem)] font-[740]">
+      Gratis belum tentu hemat. Mahal belum tentu tepat.
+    </h2>
+
+    <div class="mt-10 grid gap-4 md:mt-14 lg:grid-cols-3">
+      {
+        options.map((o) => (
+          <div class="flex flex-col rounded-[var(--radius-photo)] border border-line bg-white p-6 sm:p-7">
+            <p class="text-lg font-bold">{o.label}</p>
+            <ul class="mt-5 flex-1 space-y-3 text-[0.9875rem] text-muted">
+              {o.questions.map((q) => (
+                <li class="flex gap-3">
+                  <span
+                    aria-hidden="true"
+                    class="grid size-5 shrink-0 place-items-center rounded-full bg-paper text-xs font-bold text-muted"
+                  >
+                    ?
+                  </span>
+                  {q}
+                </li>
+              ))}
+            </ul>
+            <p class="mt-6 border-t border-line pt-5 font-semibold">{o.verdict}</p>
+          </div>
+        ))
+      }
+
+      <div class="on-dark flex flex-col rounded-[var(--radius-photo)] bg-navy p-6 text-white sm:p-7">
+        <p class="text-lg font-bold text-cyan">Sistem yang tepat</p>
+        <p class="mt-5 text-[clamp(1.5rem,1.2rem+1vw,2rem)] leading-tight font-[740]">Liburania Business</p>
+        <p class="mt-4 text-white/75">
+          Fitur sesuai kebutuhan, manfaat jelas, dukungan bisa dikonsultasikan, dan harga transparan.
+        </p>
+        <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 border-t border-white/12 pt-5 lg:mt-auto">
+          <a href="#solusi" class="btn btn-primary">{cta.solutions}</a>
+          <a href="#harga" class="font-semibold text-white underline underline-offset-4">{cta.pricing}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
