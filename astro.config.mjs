@@ -4,5 +4,5 @@ import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
   output: 'static',
-  vite: { plugins: [tailwindcss()] },
+  vite: { plugins: [tailwindcss()], build: { assetsInlineLimit: 0 } },
 });
