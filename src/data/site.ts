@@ -29,7 +29,6 @@ export const seo = {
 
 export const nav = [
   { label: 'Solusi', href: '#solusi' },
-  { label: 'Manfaat', href: '#manfaat' },
   { label: 'Harga', href: '#harga' },
   { label: 'FAQ', href: '#faq' },
 ];
@@ -43,13 +42,4 @@ export const reliability = [
   'Struktur biaya transparan',
   'Tim support yang dapat dihubungi',
   'Pengembangan dan maintenance berkelanjutan',
-];
-
-export const controls = [
-  { title: 'Kontrol penjualan', text: 'Pantau omzet dan transaksi secara terstruktur.' },
-  { title: 'Kontrol persediaan', text: 'Pantau stok barang, bahan baku, dan pergerakannya.' },
-  { title: 'Kontrol operasional', text: 'Pantau kasir, staf, dapur, jadwal, dan pelayanan.' },
-  { title: 'Kontrol keuangan bisnis', text: 'Gunakan informasi penjualan dan biaya operasional untuk mengambil keputusan.' },
-  { title: 'Kontrol karyawan', text: 'Pantau aktivitas, performa, dan produktivitas.' },
-  { title: 'Kontrol multi-cabang', text: 'Kelola dan evaluasi outlet dalam sistem terintegrasi.' },
 ];

@@ -29,14 +29,6 @@ export interface Sector {
   uiAlt: string;
   /** object-position untuk crop di penjelajah solusi (berbeda dari hero). */
   panelCrop: string;
-  owner: {
-    focus: string;
-    question: string;
-    chartTitle: string;
-    bars: { label: string; value: number }[];
-    /** Perbandingan antar-outlet, contoh ilustrasi. */
-    outlets: { label: string; value: number }[];
-  };
 }
 
 export const sectors: Sector[] = [
@@ -58,18 +50,6 @@ export const sectors: Sector[] = [
     uiAlt: 'Layar Pesanan Dapur dengan kolom Baru, Diproses, dan Siap berisi pesanan per meja.',
     photoAlt: 'Staf kafe melayani pelanggan di meja kasir, dengan mesin kopi dan dapur di belakangnya.',
     panelCrop: '62% 50%',
-    owner: {
-      focus: 'Penjualan menu, bahan dan biaya, performa outlet',
-      question: 'Menu apa yang perlu dievaluasi?',
-      chartTitle: 'Penjualan menu',
-      outlets: [{ label: 'Outlet 1', value: 88 }, { label: 'Outlet 2', value: 64 }, { label: 'Outlet 3', value: 47 }],
-      bars: [
-        { label: 'Kopi susu', value: 92 },
-        { label: 'Nasi goreng', value: 74 },
-        { label: 'Roti bakar', value: 51 },
-        { label: 'Teh tarik', value: 33 },
-      ],
-    },
   },
   {
     id: 'retail',
@@ -89,18 +69,6 @@ export const sectors: Sector[] = [
     uiAlt: 'Layar Produk & Stok berisi daftar produk dengan SKU, harga, jumlah stok, dan status menipis atau habis.',
     photoAlt: 'Staf toko suvenir memindai barcode buku catatan di meja kasir, dengan rak mug dan tas kanvas di belakangnya.',
     panelCrop: '50% 40%',
-    owner: {
-      focus: 'Produk terlaris, nilai dan pergerakan stok, outlet',
-      question: 'Produk mana yang perlu diperhatikan?',
-      chartTitle: 'Produk terlaris',
-      outlets: [{ label: 'Outlet 1', value: 81 }, { label: 'Outlet 2', value: 58 }, { label: 'Outlet 3', value: 36 }],
-      bars: [
-        { label: 'Tas kanvas', value: 88 },
-        { label: 'Mug keramik', value: 69 },
-        { label: 'Buku catatan', value: 47 },
-        { label: 'Kain motif', value: 28 },
-      ],
-    },
   },
   {
     id: 'service',
@@ -120,17 +88,5 @@ export const sectors: Sector[] = [
     uiAlt: 'Layar Jadwal Staf berisi kalender harian dengan booking pelanggan untuk tiap staf.',
     photoAlt: 'Resepsionis salon menyambut pelanggan di meja resepsionis, dengan kursi salon terlihat di ruangan belakang.',
     panelCrop: '30% 50%',
-    owner: {
-      focus: 'Layanan terlaris, transaksi staf, komisi, outlet',
-      question: 'Bagaimana performa layanan dan tim?',
-      chartTitle: 'Layanan terlaris',
-      outlets: [{ label: 'Outlet 1', value: 92 }, { label: 'Outlet 2', value: 61 }, { label: 'Outlet 3', value: 42 }],
-      bars: [
-        { label: 'Potong rambut', value: 90 },
-        { label: 'Creambath', value: 63 },
-        { label: 'Pewarnaan', value: 45 },
-        { label: 'Manikur', value: 30 },
-      ],
-    },
   },
 ];

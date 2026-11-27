@@ -190,8 +190,7 @@
 
 /* Panel solusi: pergantian tab singkat (≤240 ms, geser 6 px) agar terasa responsif, bukan pertunjukan. */
 @media (prefers-reduced-motion: no-preference) {
-  [data-panel].is-entering,
-  [data-owner-panel].is-entering {
+  [data-panel].is-entering {
     animation: settle 220ms var(--ease-out-soft) both;
   }
 
@@ -244,12 +243,10 @@
 }
 
 /* Dengan JS: panel sektor ditumpuk di sel grid yang sama supaya tinggi layout stabil saat berganti tab. */
-.js [data-panel],
-.js [data-owner-panel] {
+.js [data-panel] {
   grid-area: 1 / 1;
 }
-.js [data-panel][data-inactive],
-.js [data-owner-panel][data-inactive] {
+.js [data-panel][data-inactive] {
   visibility: hidden;
 }
 

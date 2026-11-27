@@ -12,9 +12,7 @@ function track(event: string, props: Record<string, string | undefined>) {
 
 /* ---------- Sektor aktif: dipakai penjelajah solusi dan laporan pemilik ---------- */
 const tabs = $$<HTMLButtonElement>('[data-tab]');
-const switches = $$<HTMLButtonElement>('[data-switch]');
 const panels = $$<HTMLElement>('[data-panel]');
-const ownerPanels = $$<HTMLElement>('[data-owner-panel]');
 let current: SectorId = 'fnb';
 
 panels.forEach((p) => p.setAttribute('role', 'tabpanel'));
@@ -40,9 +38,7 @@ function setSector(id: SectorId, source: string) {
     tab.setAttribute('aria-selected', String(selected));
     tab.tabIndex = selected ? 0 : -1;
   }
-  for (const btn of switches) btn.setAttribute('aria-pressed', String(btn.dataset.switch === id));
   showOnly(panels, 'panel', id, true);
-  showOnly(ownerPanels, 'ownerPanel', id, true);
   track('sector_select', { sector: id, source_section: source });
 }
 
@@ -62,8 +58,6 @@ tabs.forEach((tab, i) => {
     setSector(tabs[next].dataset.tab as SectorId, 'solusi');
   });
 });
-
-switches.forEach((btn) => btn.addEventListener('click', () => setSector(btn.dataset.switch as SectorId, 'kendali')));
 
 // Pintasan hero & daftar jenis usaha: pilih sektor, gulir ke solusi, pindahkan fokus ke judulnya.
 $$<HTMLAnchorElement>('[data-sector-link]').forEach((link) =>

@@ -1,5 +1,6 @@
 ---
-import { pricingUrlFor, price, reliability } from '../data/site';
+import { Picture } from 'astro:assets';
+import { price, pricingUrlFor, reliability } from '../data/site';
 import { sectors } from '../data/sectors';
 ---
 
@@ -14,27 +15,60 @@ import { sectors } from '../data/sectors';
       </p>
     </div>
 
-    <ul class="mt-10 grid gap-4 md:mt-14 md:grid-cols-3">
+    <ul class="mt-10 grid gap-5 md:mt-14 md:grid-cols-3">
       {
         sectors.map((s) => (
-          <li class="flex flex-col rounded-[var(--radius-photo)] border border-line bg-white p-6 sm:p-7">
-            <p class="text-sm font-semibold text-blue-deep">{s.tab}</p>
-            <p class="mt-1 text-xl font-bold">{s.product}</p>
-            <p class="mt-2 text-[0.9375rem] text-muted">{s.audience}</p>
-            <p class="mt-8 text-sm font-semibold text-muted">Mulai</p>
-            <p class="flex items-baseline gap-1.5">
-              <span class="text-[2.5rem] leading-none font-[760] tracking-[-0.03em] tabular-nums">{price}</span>
-              <span class="text-muted">/ bulan</span>
-            </p>
-            <a
-              href={pricingUrlFor(s.product)}
-              target="_blank"
-              rel="noopener"
-              class="btn btn-quiet mt-8 w-full"
-              data-track="pricing_click"
-              data-section="harga"
-              data-sector={s.id}>Konsultasikan paket</a
-            >
+          <li class="group flex flex-col overflow-clip rounded-[var(--radius-panel)] border border-line bg-white transition-[box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:shadow-[0_24px_50px_-30px_rgb(7_28_61/0.45)]">
+            <div class="relative aspect-[16/10] overflow-clip bg-navy">
+              <Picture
+                src={s.ui}
+                alt=""
+                formats={['avif', 'webp']}
+                fallbackFormat="jpg"
+                widths={[480, 720, 960]}
+                sizes="(min-width: 768px) 33vw, 100vw"
+                class="h-full w-full object-cover object-left-top"
+              />
+              <span class="absolute top-3 left-3 rounded-full bg-cyan px-3 py-1 text-xs font-bold text-navy shadow-sm">
+                {s.tab}
+              </span>
+            </div>
+
+            <div class="flex flex-1 flex-col p-6 sm:p-7">
+              <p class="text-xl font-bold">{s.product}</p>
+              <p class="mt-1.5 text-[0.9375rem] text-muted">{s.audience}</p>
+
+              <div class="mt-7 border-t border-line pt-6">
+                <p class="text-sm font-semibold text-muted">Mulai dari</p>
+                <p class="mt-1 flex items-start gap-1 text-navy">
+                  <span class="mt-[0.35em] text-xl font-bold">Rp</span>
+                  <span class="text-[clamp(3.25rem,2.4rem+2.4vw,4.25rem)] leading-none font-[780] tracking-[-0.045em] tabular-nums">{price.replace('Rp', '')}</span>
+                </p>
+                <p class="mt-2 text-[0.9375rem] font-semibold text-blue-deep">per bulan</p>
+              </div>
+
+              <ul class="mt-6 flex-1 space-y-2.5 text-[0.9375rem]">
+                {s.features.slice(0, 4).map((f) => (
+                  <li class="flex items-center gap-2.5">
+                    <svg aria-hidden="true" viewBox="0 0 20 20" class="size-4 shrink-0 text-blue" fill="none" stroke="currentColor" stroke-width="2.4">
+                      <path d="M4 10.5l4 4 8-9" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    {f}
+                  </li>
+                ))}
+                <li class="pl-6.5 text-muted">+ {s.features.length - 4} fitur lainnya</li>
+              </ul>
+
+              <a
+                href={pricingUrlFor(s.product)}
+                target="_blank"
+                rel="noopener"
+                class="btn btn-primary mt-7 w-full"
+                data-track="pricing_click"
+                data-section="harga"
+                data-sector={s.id}>Konsultasikan paket</a
+              >
+            </div>
           </li>
         ))
       }

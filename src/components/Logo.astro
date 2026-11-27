@@ -2,13 +2,15 @@
 interface Props {
   tone?: 'color' | 'white';
   class?: string;
+  /** Logo di header berada di atas lipatan (eager); di footer lazy. */
+  loading?: 'eager' | 'lazy';
 }
-const { tone = 'color', class: className } = Astro.props;
+const { tone = 'color', class: className, loading = 'eager' } = Astro.props;
 const src = tone === 'white' ? '/logo-liburania-white.png' : '/logo-liburania.png';
 ---
 
 <span class:list={['inline-flex items-center gap-2.5', className]}>
-  <img src={src} alt="Liburania" width="480" height="110" class="h-6 w-auto sm:h-7" />
+  <img src={src} alt="Liburania" width="480" height="110" loading={loading} decoding="async" class="h-6 w-auto sm:h-7" />
   <span
     class:list={[
       'border-l pl-2.5 text-[0.9375rem] leading-none font-semibold tracking-[-0.01em]',
