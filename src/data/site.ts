@@ -12,6 +12,9 @@ export const demoUrlFor = (product: string) => whatsappUrl(`Halo, saya ingin men
 export const pricingUrlFor = (product: string) =>
   whatsappUrl(`Halo, saya ingin konsultasi paket ${product} yang tepat untuk usaha saya.`);
 
+// Halaman utama Liburania Business di situs Liburania (logo dan "Tentang Liburania").
+export const aboutUrl = 'https://liburania.com/business';
+
 export const cta = {
   demo: 'Jadwalkan Demo',
   consult: 'Konsultasi via WhatsApp',

@@ -36,7 +36,7 @@ import { sectors } from '../data/sectors';
             aria-controls={`solusi-${s.id}`}
             aria-selected={i === 0 ? 'true' : 'false'}
             tabindex={i === 0 ? 0 : -1}
-            class="group flex min-h-14 items-center justify-center gap-3 rounded-[13px] px-2 py-2 text-left transition-[background-color,box-shadow] duration-200 hover:bg-white aria-selected:bg-white aria-selected:shadow-[0_0_0_1.5px_var(--color-navy)] sm:justify-start sm:px-3"
+            class="group flex min-h-14 items-center justify-center gap-3 rounded-[13px] px-2 py-2 text-center transition-[background-color,box-shadow] duration-200 hover:bg-white aria-selected:bg-white aria-selected:shadow-[0_0_0_1.5px_var(--color-navy)] sm:justify-start sm:px-3"
           >
             <Image
               src={s.photo}
@@ -46,7 +46,7 @@ import { sectors } from '../data/sectors';
               class="hidden size-10 shrink-0 rounded-[10px] object-cover sm:block md:size-12"
               style={`object-position:${s.panelCrop}`}
             />
-            <span class="min-w-0">
+            <span class="min-w-0 text-center sm:text-left">
               <span class="block text-base font-bold md:text-lg">{s.tab}</span>
               <span class="hidden truncate text-sm text-muted group-aria-selected:text-navy/70 lg:block">
                 {s.audienceShort}

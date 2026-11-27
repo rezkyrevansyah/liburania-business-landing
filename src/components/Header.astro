@@ -1,6 +1,6 @@
 ---
 import Logo from './Logo.astro';
-import { demoUrl, cta, nav } from '../data/site';
+import { demoUrl, cta, nav, aboutUrl } from '../data/site';
 ---
 
 <header
@@ -8,7 +8,7 @@ import { demoUrl, cta, nav } from '../data/site';
   class="sticky top-0 z-40 border-b border-transparent bg-paper/85 backdrop-blur-md transition-colors duration-200 data-[scrolled]:border-line"
 >
   <div class="shell flex h-16 items-center justify-between gap-6 md:h-[72px]">
-    <a href="#top" class="rounded-md" aria-label="Liburania Business, kembali ke atas">
+    <a href={aboutUrl} class="rounded-md" aria-label="Liburania Business, buka halaman Liburania Business">
       <Logo />
     </a>
     <nav aria-label="Navigasi utama" class="hidden md:block">
