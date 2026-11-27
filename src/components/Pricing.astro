@@ -22,7 +22,8 @@ import SectorIcon from './SectorIcon.astro';
           <li
             data-reveal-item="scale"
             style={`--i:${idx + 1}`}
-            class="group flex flex-col overflow-clip rounded-[var(--radius-panel)] border border-line bg-white shadow-[0_1px_2px_rgb(7_28_61/0.04),0_18px_40px_-18px_rgb(7_28_61/0.18)] transition-[box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:shadow-[0_24px_50px_-30px_rgb(7_28_61/0.45)]"
+            data-sector={s.id}
+            class="price-card group flex flex-col overflow-clip rounded-[var(--radius-panel)] border border-line bg-white shadow-[0_1px_2px_rgb(7_28_61/0.04),0_18px_40px_-18px_rgb(7_28_61/0.18)]"
           >
             <div class:list={['flex flex-col gap-5 px-6 pt-5', tone[s.id].tint]}>
               <div class="flex items-center justify-between gap-3">
@@ -39,7 +40,7 @@ import SectorIcon from './SectorIcon.astro';
                   fallbackFormat="jpg"
                   widths={[480, 720, 960]}
                   sizes="(min-width: 1024px) 33vw, (min-width: 640px) 36rem, 100vw"
-                  class="h-full w-full object-cover object-left-top"
+                  class="price-shot h-full w-full object-cover object-left-top"
                 />
               </div>
             </div>

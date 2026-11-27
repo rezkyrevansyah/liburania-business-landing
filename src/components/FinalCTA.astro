@@ -42,7 +42,8 @@ import SectorIcon from './SectorIcon.astro';
           <li
             data-reveal-item="scale"
             style={`--i:${idx + 2}`}
-            class="flex flex-col rounded-[var(--radius-panel)] border border-white/14 bg-navy-soft p-6 sm:p-7"
+            data-sector={s.id}
+            class="price-card price-card--dark flex flex-col overflow-clip rounded-[var(--radius-panel)] border border-white/14 bg-navy-soft p-6 sm:p-7"
           >
             <span class:list={['inline-flex h-[30px] items-center gap-2 self-start rounded-full pr-3 pl-2.5 text-[0.8125rem] font-bold', sectorTone[s.id].tint, sectorTone[s.id].text]}>
               <SectorIcon id={s.id} class="size-[15px] shrink-0" />

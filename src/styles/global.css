@@ -322,3 +322,67 @@
     display: none;
   }
 }
+
+/* Kartu harga (section harga dan penutup): hover halus. Sorotan mengikuti warna produk lewat --tone.
+   Hanya transform, bayangan, dan warna; panah tombol bergeser sedikit, layar sistem membesar tipis. */
+.price-card {
+  --tone: 7 86 209;
+  --tone-light: 96 165 250;
+  position: relative;
+  transition:
+    transform 320ms var(--ease-out-soft),
+    box-shadow 320ms var(--ease-out-soft),
+    border-color 320ms ease,
+    background-color 320ms ease;
+}
+.price-card[data-sector='fnb'] {
+  --tone: 194 65 12;
+  --tone-light: 251 146 60;
+}
+.price-card[data-sector='service'] {
+  --tone: 15 122 98;
+  --tone-light: 52 211 153;
+}
+.price-card::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 2;
+  height: 3px;
+  background: rgb(var(--tone));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 420ms var(--ease-out-soft);
+  pointer-events: none;
+}
+.price-card--dark::before {
+  background: rgb(var(--tone-light));
+}
+.price-card .price-shot {
+  transform-origin: left top;
+  transition: transform 700ms var(--ease-out-soft);
+}
+.price-card .btn svg {
+  transition: transform 260ms var(--ease-out-soft);
+}
+.price-card:is(:hover, :focus-within) {
+  transform: translate3d(0, -6px, 0);
+  border-color: rgb(var(--tone) / 0.4);
+  box-shadow:
+    0 2px 4px rgb(7 28 61 / 0.05),
+    0 30px 54px -24px rgb(var(--tone) / 0.5);
+}
+.price-card:is(:hover, :focus-within)::before {
+  transform: scaleX(1);
+}
+.price-card:is(:hover, :focus-within) .price-shot {
+  transform: scale(1.045);
+}
+.price-card:is(:hover, :focus-within) .btn svg {
+  transform: translateX(4px);
+}
+.price-card--dark:is(:hover, :focus-within) {
+  background-color: color-mix(in oklab, var(--color-navy-soft) 90%, white);
+  border-color: rgb(var(--tone-light) / 0.55);
+  box-shadow: 0 30px 54px -26px rgb(var(--tone-light) / 0.45);
+}
