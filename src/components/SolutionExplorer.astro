@@ -66,10 +66,10 @@ import { sectors } from '../data/sectors';
             data-inactive={i === 0 ? undefined : ''}
             aria-labelledby={`panel-title-${s.id}`}
           >
-            <div class="grid overflow-hidden rounded-[var(--radius-panel)] bg-navy lg:grid-cols-[1.05fr_1fr]">
+            <div class="grid overflow-clip rounded-[var(--radius-panel)] bg-navy lg:grid-cols-[1.05fr_1fr]">
               <!-- Depan usaha (foto) dan sistem di baliknya (layar) dalam satu bidang: layar menempel di sudut, tepat di batas kolom sistem. -->
               <div class="relative lg:min-h-[640px]">
-                <div class="panel-photo relative aspect-[5/4] overflow-hidden sm:aspect-[16/10] lg:absolute lg:inset-0 lg:aspect-auto">
+                <div class="panel-photo relative aspect-[5/4] overflow-clip sm:aspect-[16/10] lg:absolute lg:inset-0 lg:aspect-auto">
                   <Picture
                     src={s.photo}
                     alt={s.photoAlt}
@@ -77,7 +77,7 @@ import { sectors } from '../data/sectors';
                     fallbackFormat="jpg"
                     widths={[640, 960, 1280]}
                     sizes="(min-width: 1024px) 50vw, 100vw"
-                    class="photo absolute inset-0"
+                    class="photo parallax absolute inset-0"
                     style={`object-position:${s.panelCrop}`}
                   />
                   <p class="absolute top-4 left-4 hidden max-w-[calc(100%-2rem)] sm:block rounded-[12px] bg-white/95 px-3.5 py-2 text-sm leading-snug text-navy backdrop-blur sm:max-w-sm">

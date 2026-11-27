@@ -48,7 +48,7 @@ const tiles = [
               <a
                 href={`#solusi-${s.id}`}
                 data-sector-link={s.id}
-                class="group relative block h-full overflow-hidden rounded-[var(--radius-photo)] bg-line"
+                class="group relative block h-full overflow-clip rounded-[var(--radius-photo)] bg-line"
               >
                 <Picture
                   src={s.photo}
@@ -59,7 +59,7 @@ const tiles = [
                   sizes={sizes}
                   loading="eager"
                   fetchpriority={i === 0 ? 'high' : 'auto'}
-                  class="photo transition-transform duration-700 ease-[var(--ease-out-soft)] group-hover:scale-[1.03]"
+                  class="photo parallax transition-transform duration-700 ease-[var(--ease-out-soft)] group-hover:scale-[1.03]"
                   style={`object-position:${crop}`}
                 />
                 <span class="absolute bottom-3 left-3 flex items-baseline gap-2 rounded-[10px] whitespace-nowrap bg-white/95 px-3 py-2 shadow-[0_1px_2px_rgb(7_28_61/0.12)] backdrop-blur">

@@ -164,6 +164,30 @@
   }
 }
 
+/* Kedalaman saat scroll: foto bergeser sedikit mengikuti posisi section di layar.
+   Murni CSS (scroll-driven animation), hanya transform, tanpa JavaScript.
+   Foto di-scale 1.12 agar tepi tidak terbuka saat bergeser. Browser tanpa dukungan: foto diam. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .parallax {
+      scale: 1.12;
+      animation-name: depth;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: view();
+      animation-range: cover;
+    }
+    @keyframes depth {
+      from {
+        translate: 0 -4%;
+      }
+      to {
+        translate: 0 4%;
+      }
+    }
+  }
+}
+
 /* Panel solusi: pergantian tab singkat (≤240 ms, geser 6 px) agar terasa responsif, bukan pertunjukan. */
 @media (prefers-reduced-motion: no-preference) {
   [data-panel].is-entering,
