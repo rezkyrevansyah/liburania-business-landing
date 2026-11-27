@@ -15,6 +15,13 @@
   --color-muted: #526174;
   --color-mist: #a9b8cc;
 
+  /* Warna identitas per produk di kartu harga. Retail memakai blue-deep. */
+  --color-fnb: #c2410c;
+  --color-fnb-tint: #ffefe2;
+  --color-retail-tint: #e6efff;
+  --color-service: #0f7a62;
+  --color-service-tint: #e1f5ef;
+
   --radius-photo: 20px;
   --radius-panel: 24px;
   --radius-control: 12px;
