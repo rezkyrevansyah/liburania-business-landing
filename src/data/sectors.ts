@@ -31,6 +31,13 @@ export interface Sector {
   panelCrop: string;
 }
 
+/** Warna identitas per produk (kelas Tailwind ditulis utuh agar terdeteksi). */
+export const sectorTone: Record<SectorId, { tint: string; text: string; solid: string }> = {
+  fnb: { tint: 'bg-fnb-tint', text: 'text-fnb', solid: 'bg-fnb' },
+  retail: { tint: 'bg-retail-tint', text: 'text-blue-deep', solid: 'bg-blue-deep' },
+  service: { tint: 'bg-service-tint', text: 'text-service', solid: 'bg-service' },
+};
+
 export const sectors: Sector[] = [
   {
     id: 'fnb',

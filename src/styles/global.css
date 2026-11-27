@@ -130,6 +130,13 @@
   .btn-ghost-light:hover {
     border-color: #fff;
   }
+  .btn-light {
+    background: #fff;
+    color: var(--color-navy);
+  }
+  .btn-light:hover {
+    background: var(--color-paper);
+  }
 
   .photo {
     display: block;
