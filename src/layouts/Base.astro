@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import { seo } from '../data/site';
+// Preload font utama (subset latin) agar judul hero tidak berganti font saat dimuat.
+import jakartaLatin from '@fontsource-variable/plus-jakarta-sans/files/plus-jakarta-sans-latin-wght-normal.woff2?url';
 
 interface Props {
   title?: string;
@@ -21,6 +23,7 @@ const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).href : un
     <meta name="description" content={description} />
     <meta name="theme-color" content="#071c3d" />
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="preload" href={jakartaLatin} as="font" type="font/woff2" crossorigin />
     {canonical && <link rel="canonical" href={canonical} />}
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="id_ID" />

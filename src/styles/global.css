@@ -403,3 +403,23 @@ html:has(.lightbox[open]) {
   border-color: rgb(var(--tone-light) / 0.55);
   box-shadow: 0 30px 54px -26px rgb(var(--tone-light) / 0.45);
 }
+
+/* Header: efek kaca yang ringan. Biaya backdrop-filter naik seiring radius blur, jadi radiusnya kecil (8px)
+   dan hanya aktif di perangkat dengan mouse. Ponsel memakai latar solid agar scroll tetap mulus. */
+[data-header] {
+  background-color: color-mix(in oklab, var(--color-paper) 95%, transparent);
+}
+@media (hover: hover) and (pointer: fine) {
+  [data-header] {
+    background-color: color-mix(in oklab, var(--color-paper) 80%, transparent);
+    -webkit-backdrop-filter: blur(8px) saturate(1.4);
+    backdrop-filter: blur(8px) saturate(1.4);
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  [data-header] {
+    background-color: var(--color-paper);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}

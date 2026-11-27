@@ -114,8 +114,19 @@ navLinks.forEach((a, i) =>
   }),
 );
 window.addEventListener('scrollend', () => navLocked && unlockNav());
-window.addEventListener('scroll', onScroll, { passive: true });
-window.addEventListener('resize', onScroll, { passive: true });
+// Satu kali per frame: event scroll bisa datang beberapa kali per frame (trackpad, layar 120 Hz),
+// sedangkan onScroll membaca posisi layout.
+let scrollQueued = false;
+const queueScroll = () => {
+  if (scrollQueued) return;
+  scrollQueued = true;
+  requestAnimationFrame(() => {
+    scrollQueued = false;
+    onScroll();
+  });
+};
+window.addEventListener('scroll', queueScroll, { passive: true });
+window.addEventListener('resize', queueScroll, { passive: true });
 onScroll();
 
 /* ---------- Reveal: tiap section & grup kartu muncul halus sekali saat masuk layar ---------- */
