@@ -386,8 +386,10 @@
   background: rgb(7 28 61 / 0.82);
   backdrop-filter: blur(4px);
 }
+/* Kunci scroll tanpa menggeser isi halaman: ruang scrollbar tetap dicadangkan. */
 html:has(.lightbox[open]) {
   overflow: hidden;
+  scrollbar-gutter: stable;
 }
 @media (prefers-reduced-motion: no-preference) {
   .lightbox[open] {

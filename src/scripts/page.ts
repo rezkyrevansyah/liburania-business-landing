@@ -164,13 +164,21 @@ if (bar && heroCta) {
 const lightbox = document.querySelector<HTMLDialogElement>('[data-lightbox-dialog]');
 const lightboxImg = lightbox?.querySelector('img');
 if (lightbox && lightboxImg) {
-  $$<HTMLButtonElement>('[data-lightbox]').forEach((btn) =>
-    btn.addEventListener('click', () => {
-      lightboxImg.src = btn.dataset.lightbox!;
+  // Gambar besar dihangatkan saat kursor/fokus mendekat, dan didekode sebelum dialog dibuka,
+  // agar pop up langsung tampil utuh (tanpa melompat ukuran atau menampilkan gambar kartu sebelumnya).
+  const warm = (url: string) => void (new Image().src = url);
+  $$<HTMLButtonElement>('[data-lightbox]').forEach((btn) => {
+    const url = btn.dataset.lightbox!;
+    btn.addEventListener('pointerenter', () => warm(url), { once: true });
+    btn.addEventListener('focus', () => warm(url), { once: true });
+    btn.addEventListener('click', async () => {
+      lightboxImg.src = url;
       lightboxImg.alt = btn.dataset.lightboxAlt ?? '';
-      lightbox.showModal();
-    }),
-  );
+      // Bila jaringan lambat, jangan biarkan klik terasa mati: buka setelah maksimal 700 ms.
+      await Promise.race([lightboxImg.decode().catch(() => {}), new Promise((r) => setTimeout(r, 700))]);
+      if (!lightbox.open) lightbox.showModal();
+    });
+  });
   // Klik di area gelap (di luar gambar) menutup pop up.
   lightbox.addEventListener('click', (e) => e.target === lightbox && lightbox.close());
 }

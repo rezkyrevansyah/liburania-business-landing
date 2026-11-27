@@ -40,7 +40,7 @@ const zoomSrc = await Promise.all(
               </span>
               <button
                 type="button"
-                class="flex min-h-0 flex-1 cursor-zoom-in items-center justify-center rounded-[var(--radius-control)]"
+                class="flex min-h-0 flex-1 items-center justify-center rounded-[var(--radius-control)] [.js_&]:cursor-zoom-in"
                 data-lightbox={zoomSrc[idx]}
                 data-lightbox-alt={`Tampilan sistem ${s.product}`}
                 aria-label={`Perbesar tampilan sistem ${s.product}`}
