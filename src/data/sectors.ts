@@ -5,6 +5,8 @@ import servicePhoto from '../assets/images/service-business.png';
 import fnbUi from '../assets/images/ui-fnb-kitchen.png';
 import retailUi from '../assets/images/ui-retail-stock.png';
 import serviceUi from '../assets/images/ui-service-calendar.png';
+import fnbPriceUi from '../assets/images/price-fnb-pos.jpg';
+import retailPriceUi from '../assets/images/price-retail-pos.jpg';
 
 // Nama produk, fitur, manfaat, dan jenis usaha mengikuti materi owner (Materi_Lengkap_Liburania_Business.md).
 export type SectorId = 'fnb' | 'retail' | 'service';
@@ -25,6 +27,8 @@ export interface Sector {
   photoAlt: string;
   /** Ilustrasi layar produk (berlabel 'Ilustrasi produk · Data contoh' di dalam gambar). */
   ui: ImageMetadata;
+  /** Screenshot khusus kartu harga (opsional). Jika kosong, kartu memakai `ui`. */
+  priceUi?: ImageMetadata;
   uiLabel: string;
   uiAlt: string;
   /** object-position untuk crop di penjelajah solusi (berbeda dari hero). */
@@ -53,6 +57,7 @@ export const sectors: Sector[] = [
       'Transaksi lebih cepat, pesanan dapur terpantau, dan stok bahan terkendali. Margin mudah dievaluasi dan pemilik bisa memantau performa bisnis.',
     photo: fnbPhoto,
     ui: fnbUi,
+    priceUi: fnbPriceUi,
     uiLabel: 'Kitchen Display',
     uiAlt: 'Layar Pesanan Dapur dengan kolom Baru, Diproses, dan Siap berisi pesanan per meja.',
     photoAlt: 'Staf kafe melayani pelanggan di meja kasir, dengan mesin kopi dan dapur di belakangnya.',
@@ -72,6 +77,7 @@ export const sectors: Sector[] = [
       'Penjualan terpantau, stok akurat, produk terlaris jelas, dan pembelian terorganisir. Kasir mudah diawasi dan performa cabang bisa dievaluasi.',
     photo: retailPhoto,
     ui: retailUi,
+    priceUi: retailPriceUi,
     uiLabel: 'Produk & stok',
     uiAlt: 'Layar Produk & Stok berisi daftar produk dengan SKU, harga, jumlah stok, dan status menipis atau habis.',
     photoAlt: 'Staf toko suvenir memindai barcode buku catatan di meja kasir, dengan rak mug dan tas kanvas di belakangnya.',

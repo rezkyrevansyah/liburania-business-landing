@@ -32,13 +32,13 @@ import SectorIcon from './SectorIcon.astro';
                   {s.tab}
                 </span>
               </div>
-              <div class="aspect-[2/1] overflow-clip rounded-t-[var(--radius-control)] border border-b-0 border-white shadow-[0_14px_30px_-8px_rgb(7_28_61/0.28)]">
+              <div class="aspect-[2.3/1] overflow-clip rounded-t-[var(--radius-control)] border border-b-0 border-white shadow-[0_14px_30px_-8px_rgb(7_28_61/0.28)]">
                 <Picture
-                  src={s.ui}
+                  src={s.priceUi ?? s.ui}
                   alt=""
                   formats={['avif', 'webp']}
                   fallbackFormat="jpg"
-                  widths={[480, 720, 960]}
+                  widths={[480, 720, 960, 1200]}
                   sizes="(min-width: 1024px) 33vw, (min-width: 640px) 36rem, 100vw"
                   class="price-shot h-full w-full object-cover object-left-top"
                 />
