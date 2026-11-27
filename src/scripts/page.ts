@@ -160,6 +160,21 @@ if (bar && heroCta) {
   enders.forEach((el) => endObserver.observe(el));
 }
 
+/* ---------- Pop up screenshot kartu harga ---------- */
+const lightbox = document.querySelector<HTMLDialogElement>('[data-lightbox-dialog]');
+const lightboxImg = lightbox?.querySelector('img');
+if (lightbox && lightboxImg) {
+  $$<HTMLButtonElement>('[data-lightbox]').forEach((btn) =>
+    btn.addEventListener('click', () => {
+      lightboxImg.src = btn.dataset.lightbox!;
+      lightboxImg.alt = btn.dataset.lightboxAlt ?? '';
+      lightbox.showModal();
+    }),
+  );
+  // Klik di area gelap (di luar gambar) menutup pop up.
+  lightbox.addEventListener('click', (e) => e.target === lightbox && lightbox.close());
+}
+
 /* ---------- Klik CTA ---------- */
 document.addEventListener('click', (e) => {
   const el = (e.target as Element).closest<HTMLElement>('[data-track]');

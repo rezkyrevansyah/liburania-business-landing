@@ -359,7 +359,7 @@
   background: rgb(var(--tone-light));
 }
 .price-card .price-shot {
-  transform-origin: left top;
+  transform-origin: center;
   transition: transform 700ms var(--ease-out-soft);
 }
 .price-card .btn svg {
@@ -380,6 +380,19 @@
 }
 .price-card:is(:hover, :focus-within) .btn svg {
   transform: translateX(4px);
+}
+/* Pop up screenshot kartu harga. */
+.lightbox::backdrop {
+  background: rgb(7 28 61 / 0.82);
+  backdrop-filter: blur(4px);
+}
+html:has(.lightbox[open]) {
+  overflow: hidden;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lightbox[open] {
+    animation: settle 240ms var(--ease-out-soft) both;
+  }
 }
 .price-card--dark:is(:hover, :focus-within) {
   background-color: color-mix(in oklab, var(--color-navy-soft) 90%, white);

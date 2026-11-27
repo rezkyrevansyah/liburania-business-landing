@@ -1,8 +1,16 @@
 ---
-import { Picture } from 'astro:assets';
+import { Picture, getImage } from 'astro:assets';
 import { price, pricingUrlFor, reliability } from '../data/site';
 import { sectors, sectorTone as tone } from '../data/sectors';
 import SectorIcon from './SectorIcon.astro';
+
+// Versi besar untuk pop up; tidak memperbesar melebihi ukuran asli.
+const zoomSrc = await Promise.all(
+  sectors.map(async (s) => {
+    const src = s.priceUi ?? s.ui;
+    return (await getImage({ src, width: Math.min(src.width, 1600), format: 'webp' })).src;
+  }),
+);
 ---
 
 <section id="harga" aria-labelledby="harga-title" class="py-16 md:py-24 lg:py-28">
@@ -25,24 +33,29 @@ import SectorIcon from './SectorIcon.astro';
             data-sector={s.id}
             class="price-card group flex flex-col overflow-clip rounded-[var(--radius-panel)] border border-line bg-white shadow-[0_1px_2px_rgb(7_28_61/0.04),0_18px_40px_-18px_rgb(7_28_61/0.18)]"
           >
-            <div class:list={['flex flex-col gap-5 px-6 pt-5', tone[s.id].tint]}>
-              <div class="flex items-center justify-between gap-3">
-                <span class:list={['inline-flex h-8 items-center gap-2 rounded-full pr-3.5 pl-2.5 text-[0.8125rem] font-bold text-white', tone[s.id].solid]}>
-                  <SectorIcon id={s.id} class="size-4 shrink-0" />
-                  {s.tab}
-                </span>
-              </div>
-              <div class="aspect-[2.3/1] overflow-clip rounded-t-[var(--radius-control)] border border-b-0 border-white shadow-[0_14px_30px_-8px_rgb(7_28_61/0.28)]">
+            <div class:list={['flex h-[17.5rem] flex-col gap-3 p-5', tone[s.id].tint]}>
+              <span class:list={['inline-flex h-8 items-center gap-2 self-start rounded-full pr-3.5 pl-2.5 text-[0.8125rem] font-bold text-white', tone[s.id].solid]}>
+                <SectorIcon id={s.id} class="size-4 shrink-0" />
+                {s.tab}
+              </span>
+              <button
+                type="button"
+                class="flex min-h-0 flex-1 cursor-zoom-in items-center justify-center rounded-[var(--radius-control)]"
+                data-lightbox={zoomSrc[idx]}
+                data-lightbox-alt={`Tampilan sistem ${s.product}`}
+                aria-label={`Perbesar tampilan sistem ${s.product}`}
+              >
                 <Picture
                   src={s.priceUi ?? s.ui}
                   alt=""
                   formats={['avif', 'webp']}
                   fallbackFormat="jpg"
-                  widths={[480, 720, 960, 1200]}
-                  sizes="(min-width: 1024px) 33vw, (min-width: 640px) 36rem, 100vw"
-                  class="price-shot h-full w-full object-cover object-left-top"
+                  widths={[480, 720, 960]}
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 34rem, 100vw"
+                  pictureAttributes={{ class: 'contents' }}
+                  class="price-shot block h-auto max-h-[12.25rem] w-auto max-w-full rounded-[10px] border-3 border-white shadow-[0_2px_4px_rgb(7_28_61/0.06),0_16px_32px_-12px_rgb(7_28_61/0.3)]"
                 />
-              </div>
+              </button>
             </div>
 
             <div class="flex flex-1 flex-col p-6 sm:p-7">
@@ -126,4 +139,19 @@ import SectorIcon from './SectorIcon.astro';
       </ul>
     </div>
   </div>
+
+  <!-- Pop up screenshot: <dialog> bawaan browser (Esc menutup, fokus terkunci di dalam). -->
+  <dialog data-lightbox-dialog aria-label="Tampilan sistem" class="lightbox m-auto max-w-[min(94vw,1200px)] overflow-visible bg-transparent p-0">
+    <img alt="" class="block h-auto max-h-[86vh] w-auto max-w-full rounded-[var(--radius-control)] shadow-[0_30px_80px_-20px_rgb(0_0_0/0.6)]" />
+    <form method="dialog">
+      <button
+        class="absolute -top-3 -right-3 grid size-11 place-items-center rounded-full bg-white text-navy shadow-lg transition-transform hover:scale-105"
+        aria-label="Tutup"
+      >
+        <svg aria-hidden="true" viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+          <path d="M18 6 6 18M6 6l12 12" />
+        </svg>
+      </button>
+    </form>
+  </dialog>
 </section>
