@@ -365,20 +365,22 @@
 .price-card .btn svg {
   transition: transform 260ms var(--ease-out-soft);
 }
-.price-card:is(:hover, :focus-within) {
+/* Sorotan aktif saat hover, atau saat tombol CTA difokus lewat keyboard. Fokus pada tombol zoom sengaja tidak
+   ikut: setelah pop up ditutup, fokus kembali ke tombol itu dan kartu tidak boleh tetap terangkat. */
+.price-card:is(:hover, :has(.btn:focus-visible)) {
   transform: translate3d(0, -6px, 0);
   border-color: rgb(var(--tone) / 0.4);
   box-shadow:
     0 2px 4px rgb(7 28 61 / 0.05),
     0 30px 54px -24px rgb(var(--tone) / 0.5);
 }
-.price-card:is(:hover, :focus-within)::before {
+.price-card:is(:hover, :has(.btn:focus-visible))::before {
   transform: scaleX(1);
 }
-.price-card:is(:hover, :focus-within) .price-shot {
+.price-card:is(:hover, :has(.btn:focus-visible)) .price-shot {
   transform: scale(1.045);
 }
-.price-card:is(:hover, :focus-within) .btn svg {
+.price-card:is(:hover, :has(.btn:focus-visible)) .btn svg {
   transform: translateX(4px);
 }
 /* Pop up screenshot kartu harga. */
@@ -396,7 +398,7 @@ html:has(.lightbox[open]) {
     animation: settle 240ms var(--ease-out-soft) both;
   }
 }
-.price-card--dark:is(:hover, :focus-within) {
+.price-card--dark:is(:hover, :has(.btn:focus-visible)) {
   background-color: color-mix(in oklab, var(--color-navy-soft) 90%, white);
   border-color: rgb(var(--tone-light) / 0.55);
   box-shadow: 0 30px 54px -26px rgb(var(--tone-light) / 0.45);
