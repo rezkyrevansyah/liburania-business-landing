@@ -12,7 +12,9 @@ function track(event: string, props: Record<string, string | undefined>) {
 
 /* ---------- Sektor aktif: dipakai penjelajah solusi dan laporan pemilik ---------- */
 const tabs = $$<HTMLButtonElement>('[data-tab]');
+const switches = $$<HTMLButtonElement>('[data-switch]');
 const panels = $$<HTMLElement>('[data-panel]');
+const ownerPanels = $$<HTMLElement>('[data-owner-panel]');
 let current: SectorId = 'fnb';
 
 panels.forEach((p) => p.setAttribute('role', 'tabpanel'));
@@ -38,7 +40,9 @@ function setSector(id: SectorId, source: string) {
     tab.setAttribute('aria-selected', String(selected));
     tab.tabIndex = selected ? 0 : -1;
   }
+  for (const btn of switches) btn.setAttribute('aria-pressed', String(btn.dataset.switch === id));
   showOnly(panels, 'panel', id, true);
+  showOnly(ownerPanels, 'ownerPanel', id, true);
   track('sector_select', { sector: id, source_section: source });
 }
 
@@ -48,10 +52,10 @@ tabs.forEach((tab, i) => {
     const last = tabs.length - 1;
     const next =
       e.key === 'ArrowRight' ? (i === last ? 0 : i + 1)
-      : e.key === 'ArrowLeft' ? (i === 0 ? last : i - 1)
-      : e.key === 'Home' ? 0
-      : e.key === 'End' ? last
-      : -1;
+        : e.key === 'ArrowLeft' ? (i === 0 ? last : i - 1)
+          : e.key === 'Home' ? 0
+            : e.key === 'End' ? last
+              : -1;
     if (next < 0) return;
     e.preventDefault();
     tabs[next].focus();
@@ -59,7 +63,9 @@ tabs.forEach((tab, i) => {
   });
 });
 
-// Pintasan hero & daftar jenis usaha: pilih sektor, gulir ke solusi, pindahkan fokus ke judulnya.
+switches.forEach((btn) => btn.addEventListener('click', () => setSector(btn.dataset.switch as SectorId, 'kendali')));
+
+// Pintasan hero & marquee: pilih sektor, gulir ke solusi, pindahkan fokus ke judulnya.
 $$<HTMLAnchorElement>('[data-sector-link]').forEach((link) =>
   link.addEventListener('click', (e) => {
     e.preventDefault();
@@ -70,44 +76,53 @@ $$<HTMLAnchorElement>('[data-sector-link]').forEach((link) =>
   }),
 );
 
+/* ---------- Carousel jenis bisnis: tombol jeda/putar manual ---------- */
+const marqueeRoot = document.querySelector<HTMLElement>('[data-marquee-root]');
+const marqueeToggle = document.querySelector<HTMLButtonElement>('[data-marquee-toggle]');
+if (marqueeRoot && marqueeToggle) {
+  const label = marqueeToggle.querySelector<HTMLElement>('[data-toggle-label]');
+  const pauseIcon = marqueeToggle.querySelector<SVGElement>('[data-icon-pause]');
+  const playIcon = marqueeToggle.querySelector<SVGElement>('[data-icon-play]');
+  marqueeToggle.addEventListener('click', () => {
+    const paused = marqueeRoot.toggleAttribute('data-paused');
+    marqueeToggle.setAttribute('aria-pressed', String(paused));
+    marqueeToggle.setAttribute(
+      'aria-label',
+      paused ? 'Lanjutkan gerakan daftar jenis bisnis' : 'Jeda gerakan daftar jenis bisnis',
+    );
+    if (label) label.textContent = paused ? 'Putar' : 'Jeda';
+    pauseIcon?.classList.toggle('hidden', paused);
+    playIcon?.classList.toggle('hidden', !paused);
+  });
+}
+
 // Tautan langsung, mis. #solusi-retail.
 const fromHash = location.hash.match(/^#solusi-(fnb|retail|service)$/)?.[1] as SectorId | undefined;
 if (fromHash) setSector(fromHash, 'url');
 
 /* ---------- Header: garis bawah setelah halaman digulir ---------- */
 const header = document.querySelector<HTMLElement>('[data-header]');
-// Scrollspy: menu aktif = section navigasi terakhir yang sudah melewati 40% tinggi layar. Di hero: tidak ada.
-const navLinks = $$<HTMLAnchorElement>('[data-nav-link]');
-const navTargets = navLinks.map((a) => document.querySelector<HTMLElement>(a.hash));
-let activeNav = -1;
-const onScroll = () => {
-  header?.toggleAttribute('data-scrolled', window.scrollY > 8);
-  const line = window.innerHeight * 0.4;
-  let next = -1;
-  navTargets.forEach((el, i) => {
-    if (el && el.getBoundingClientRect().top <= line) next = i;
-  });
-  if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) next = navLinks.length - 1;
-  if (next === activeNav) return;
-  activeNav = next;
-  navLinks.forEach((a, i) => (i === next ? a.setAttribute('aria-current', 'location') : a.removeAttribute('aria-current')));
-};
+const onScroll = () => header?.toggleAttribute('data-scrolled', window.scrollY > 8);
 window.addEventListener('scroll', onScroll, { passive: true });
-window.addEventListener('resize', onScroll, { passive: true });
 onScroll();
 
-/* ---------- Reveal: tiap kelompok section muncul sekali saat terlihat ---------- */
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    for (const entry of entries) {
-      if (!entry.isIntersecting) continue;
-      entry.target.classList.add('is-visible');
-      revealObserver.unobserve(entry.target);
-    }
-  },
-  { rootMargin: '0px 0px -10% 0px' },
-);
-$$<HTMLElement>('[data-reveal]').forEach((el) => revealObserver.observe(el));
+/* ---------- Reveal: tiap section & grup kartu muncul halus sekali saat masuk layar ---------- */
+const revealTargets = $$<HTMLElement>('[data-reveal]');
+if (reducedMotion.matches || !('IntersectionObserver' in window)) {
+  revealTargets.forEach((el) => el.classList.add('is-visible'));
+} else {
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting && entry.boundingClientRect.top > 0) continue;
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    },
+    { rootMargin: '0px 0px -8% 0px', threshold: 0.04 },
+  );
+  revealTargets.forEach((el) => revealObserver.observe(el));
+}
 
 /* ---------- CTA bawah ponsel ---------- */
 const bar = document.querySelector<HTMLElement>('[data-mobile-cta]');
@@ -141,6 +156,6 @@ document.addEventListener('click', (e) => {
   track(event, {
     sector: el.dataset.sector ?? current,
     section: el.dataset.section,
-    destination_type: event.endsWith('_click') && el.getAttribute('href')?.startsWith('https://wa.me') ? 'whatsapp' : undefined,
+    destination_type: event === 'sales_click' ? 'contact_form' : undefined,
   });
 });

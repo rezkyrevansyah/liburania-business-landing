@@ -27,8 +27,8 @@ const accent = {
 ---
 
 <section id="jenis-bisnis" aria-labelledby="business-types-title" class="pt-16 md:pt-24 lg:pt-28">
-  <div data-reveal class="shell">
-    <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
+  <div data-reveal="stagger" class="shell">
+    <div data-reveal-item style="--i:0" class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
       <h2 id="business-types-title" class="max-w-[16ch] text-[clamp(2rem,1.2rem+2.6vw,3.25rem)] font-[740]">
         Usaha Anda termasuk yang mana?
       </h2>
@@ -39,8 +39,8 @@ const accent = {
 
     <div class="mt-10 grid gap-10 md:mt-14 md:grid-cols-3 md:gap-8">
       {
-        sectors.map((s) => (
-          <div>
+        sectors.map((s, idx) => (
+          <div data-reveal-item style={`--i:${idx + 1}`}>
             <div class={`h-1 w-full rounded-full ${accent[s.id].rule}`} aria-hidden="true" />
             <h3 class="mt-5 text-2xl font-bold">{s.tab}</h3>
             <p class="mt-1 text-[0.9375rem] text-muted">Mulai {price} / bulan</p>

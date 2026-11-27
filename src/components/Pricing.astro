@@ -6,8 +6,8 @@ import SectorIcon from './SectorIcon.astro';
 ---
 
 <section id="harga" aria-labelledby="harga-title" class="py-16 md:py-24 lg:py-28">
-  <div data-reveal class="shell">
-    <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
+  <div data-reveal="stagger" class="shell">
+    <div data-reveal-item style="--i:0" class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
       <h2 id="harga-title" class="max-w-[19ch] text-[clamp(2rem,1.2rem+2.6vw,3.25rem)] font-[740]">
         Sudah tahu apa yang Anda dapatkan? Sekarang saatnya melihat harganya.
       </h2>
@@ -18,8 +18,12 @@ import SectorIcon from './SectorIcon.astro';
 
     <ul class="mx-auto mt-10 grid max-w-xl gap-5 md:mt-14 lg:max-w-none lg:grid-cols-3">
       {
-        sectors.map((s) => (
-          <li class="group flex flex-col overflow-clip rounded-[var(--radius-panel)] border border-line bg-white shadow-[0_1px_2px_rgb(7_28_61/0.04),0_18px_40px_-18px_rgb(7_28_61/0.18)] transition-[box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:shadow-[0_24px_50px_-30px_rgb(7_28_61/0.45)]">
+        sectors.map((s, idx) => (
+          <li
+            data-reveal-item="scale"
+            style={`--i:${idx + 1}`}
+            class="group flex flex-col overflow-clip rounded-[var(--radius-panel)] border border-line bg-white shadow-[0_1px_2px_rgb(7_28_61/0.04),0_18px_40px_-18px_rgb(7_28_61/0.18)] transition-[box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:shadow-[0_24px_50px_-30px_rgb(7_28_61/0.45)]"
+          >
             <div class:list={['flex flex-col gap-5 px-6 pt-5', tone[s.id].tint]}>
               <div class="flex items-center justify-between gap-3">
                 <span class:list={['inline-flex h-8 items-center gap-2 rounded-full pr-3.5 pl-2.5 text-[0.8125rem] font-bold text-white', tone[s.id].solid]}>
@@ -97,7 +101,7 @@ import SectorIcon from './SectorIcon.astro';
       Bayar sesuai kebutuhan bisnis Anda. Jangan membayar mahal untuk fitur yang tidak digunakan.
     </p>
 
-    <div class="mt-14 grid gap-8 rounded-[var(--radius-panel)] bg-white p-6 sm:p-8 md:mt-20 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14 lg:p-12">
+    <div data-reveal="" class="mt-14 grid gap-8 rounded-[var(--radius-panel)] bg-white p-6 sm:p-8 md:mt-20 lg:grid-cols-[0.8fr_1.2fr] lg:gap-14 lg:p-12">
       <h3 class="text-[clamp(1.625rem,1.1rem+1.5vw,2.375rem)] font-[720]">
         Teknologi bisnis tidak harus mahal. Tapi harus bisa diandalkan.
       </h3>

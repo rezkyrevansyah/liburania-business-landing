@@ -5,8 +5,8 @@ import { sectors } from '../data/sectors';
 ---
 
 <section id="solusi" aria-labelledby="solusi-title" class="pt-14 pb-16 md:pt-20 md:pb-24 lg:pb-28">
-  <div data-reveal class="shell">
-    <div class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
+  <div data-reveal="stagger" class="shell">
+    <div data-reveal-item style="--i:0" class="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
       <h2
         id="solusi-title"
         tabindex="-1"
@@ -23,6 +23,8 @@ import { sectors } from '../data/sectors';
     <div
       role="tablist"
       data-tablist
+      data-reveal-item
+      style="--i:1"
       aria-label="Pilih jenis usaha"
       class="mt-10 hidden grid-cols-3 gap-2 rounded-[18px] border border-line bg-white/60 p-1.5 md:mt-12 [.js_&]:grid"
     >
@@ -57,7 +59,7 @@ import { sectors } from '../data/sectors';
       }
     </div>
 
-    <div data-panels class="mt-6 space-y-16 md:mt-8 [.js_&]:grid [.js_&]:space-y-0">
+    <div data-panels data-reveal-item="scale" style="--i:2" class="mt-6 space-y-16 md:mt-8 [.js_&]:grid [.js_&]:space-y-0">
       {
         sectors.map((s, i) => (
           <article

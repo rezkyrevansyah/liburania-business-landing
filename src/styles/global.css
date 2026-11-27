@@ -208,17 +208,69 @@
     animation: settle 220ms var(--ease-out-soft) both;
   }
 
-  /* Reveal section: satu kelompok sekaligus, sekali saja. Tanpa JS konten tetap terlihat. */
-  .js [data-reveal] {
-    transition:
-      opacity 420ms var(--ease-out-soft),
-      transform 420ms var(--ease-out-soft);
+  /* Reveal saat scroll: murni opacity & transform (compositor-only, CLS 0). Tanpa JS konten tetap terlihat. */
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 20px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
   }
-  .js [data-reveal]:not(.is-visible) {
-    opacity: 0;
-    transform: translateY(12px);
+  @keyframes reveal-scale {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 22px, 0) scale(0.982);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
   }
 
+  .js [data-reveal='']:not(.is-visible) {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  .js [data-reveal=''].is-visible {
+    animation: reveal-up 600ms var(--ease-out-soft) backwards;
+  }
+
+  .js [data-reveal='stagger']:not(.is-visible) [data-reveal-item] {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  .js [data-reveal='stagger']:not(.is-visible) [data-reveal-item='scale'] {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0) scale(0.982);
+  }
+  .js [data-reveal='stagger'].is-visible [data-reveal-item] {
+    animation: reveal-up 620ms var(--ease-out-soft) backwards;
+    animation-delay: calc(var(--i, 0) * 85ms);
+  }
+  .js [data-reveal='stagger'].is-visible [data-reveal-item='scale'] {
+    animation: reveal-scale 680ms var(--ease-out-soft) backwards;
+    animation-delay: calc(var(--i, 0) * 85ms);
+  }
+
+  /* Garis progres scroll tipis di bawah header (murni CSS scroll-driven, tanpa JS). */
+  @supports (animation-timeline: scroll()) {
+    .scroll-progress {
+      transform-origin: left;
+      animation: scroll-progress linear both;
+      animation-timeline: scroll(root);
+    }
+    @keyframes scroll-progress {
+      from {
+        transform: scaleX(0);
+      }
+      to {
+        transform: scaleX(1);
+      }
+    }
+  }
 }
 
 /* FAQ: tinggi panel ikut bertransisi saat dibuka DAN ditutup (Chrome/Edge 131+).

@@ -22,15 +22,24 @@ const options = [
 ---
 
 <section aria-labelledby="positioning-title" class="border-t border-line py-16 md:py-24">
-  <div data-reveal class="shell">
-    <h2 id="positioning-title" class="max-w-[18ch] text-[clamp(2rem,1.2rem+2.6vw,3.25rem)] font-[740]">
+  <div data-reveal="stagger" class="shell">
+    <h2
+      id="positioning-title"
+      data-reveal-item
+      style="--i:0"
+      class="max-w-[18ch] text-[clamp(2rem,1.2rem+2.6vw,3.25rem)] font-[740]"
+    >
       Gratis belum tentu hemat. Mahal belum tentu tepat.
     </h2>
 
     <div class="mt-10 grid gap-4 md:mt-14 lg:grid-cols-3">
       {
-        options.map((o) => (
-          <div class="flex flex-col rounded-[var(--radius-photo)] border border-line bg-white p-6 sm:p-7">
+        options.map((o, idx) => (
+          <div
+            data-reveal-item="scale"
+            style={`--i:${idx + 1}`}
+            class="flex flex-col rounded-[var(--radius-photo)] border border-line bg-white p-6 sm:p-7"
+          >
             <p class="text-lg font-bold">{o.label}</p>
             <ul class="mt-5 flex-1 space-y-3 text-[0.9875rem] text-muted">
               {o.questions.map((q) => (
@@ -50,7 +59,11 @@ const options = [
         ))
       }
 
-      <div class="on-dark flex flex-col rounded-[var(--radius-photo)] bg-navy p-6 text-white sm:p-7">
+      <div
+        data-reveal-item="scale"
+        style="--i:3"
+        class="on-dark flex flex-col rounded-[var(--radius-photo)] bg-navy p-6 text-white sm:p-7"
+      >
         <p class="text-lg font-bold text-cyan">Sistem yang tepat</p>
         <p class="mt-5 text-[clamp(1.5rem,1.2rem+1vw,2rem)] leading-tight font-[740]">Liburania Business</p>
         <p class="mt-4 text-white/75">

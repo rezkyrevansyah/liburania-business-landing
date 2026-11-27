@@ -31,15 +31,20 @@ const scenes = [
 ---
 
 <section aria-labelledby="problem-title" class="bg-white py-16 md:py-24 lg:py-28">
-  <div data-reveal class="shell">
-    <h2 id="problem-title" class="max-w-[19ch] text-[clamp(2rem,1.2rem+2.6vw,3.25rem)] font-[740]">
+  <div data-reveal="stagger" class="shell">
+    <h2
+      id="problem-title"
+      data-reveal-item
+      style="--i:0"
+      class="max-w-[19ch] text-[clamp(2rem,1.2rem+2.6vw,3.25rem)] font-[740]"
+    >
       Saat usaha ramai, apa yang paling sulit Anda pantau?
     </h2>
 
     <ul class="mt-10 grid gap-x-6 gap-y-12 md:mt-14 md:grid-cols-3">
       {
-        scenes.map((scene, i) => ({ ...scene, challenges: sectors[i].challenges })).map((scene) => (
-          <li>
+        scenes.map((scene, i) => ({ ...scene, challenges: sectors[i].challenges, idx: i })).map((scene) => (
+          <li data-reveal-item="scale" style={`--i:${scene.idx + 1}`}>
             <figure>
               <div class="aspect-[4/3] overflow-hidden rounded-[var(--radius-photo)] bg-line">
                 <Picture

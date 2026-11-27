@@ -11,9 +11,11 @@ const steps = [
 ---
 
 <section id="cara-kerja" aria-labelledby="demo-title" class="py-16 md:py-24 lg:py-28">
-  <div data-reveal class="shell">
+  <div data-reveal="stagger" class="shell">
     <div class="relative">
       <div
+        data-reveal-item="scale"
+        style="--i:0"
         class="aspect-[4/3] overflow-hidden rounded-[var(--radius-panel)] bg-line sm:aspect-[16/9] lg:aspect-auto lg:h-[640px]"
       >
         <Picture
@@ -23,12 +25,14 @@ const steps = [
           fallbackFormat="jpg"
           widths={[640, 1024, 1440, 1920]}
           sizes="(min-width: 1232px) 1184px, 100vw"
-          class="photo"
+          class="photo parallax"
           style="object-position: 68% 45%"
         />
       </div>
 
       <div
+        data-reveal-item="scale"
+        style="--i:2"
         class="relative -mt-16 mx-3 rounded-[var(--radius-photo)] bg-white p-6 shadow-[0_24px_60px_-28px_rgb(7_28_61/0.35)] sm:mx-6 sm:p-8 lg:absolute lg:top-1/2 lg:left-10 lg:mx-0 lg:mt-0 lg:w-[440px] lg:-translate-y-1/2 lg:p-10"
       >
         <h2 id="demo-title" class="text-[clamp(1.875rem,1.3rem+1.8vw,2.625rem)] font-[740]">

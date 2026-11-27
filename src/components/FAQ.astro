@@ -18,8 +18,8 @@ const faqs = [
 ---
 
 <section id="faq" aria-labelledby="faq-title" class="border-t border-line py-16 md:py-24 lg:py-28">
-  <div data-reveal class="shell grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
-    <div class="lg:sticky lg:top-28 lg:self-start">
+  <div data-reveal="stagger" class="shell grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+    <div data-reveal-item style="--i:0" class="lg:sticky lg:top-28 lg:self-start">
       <h2 id="faq-title" class="max-w-[12ch] text-[clamp(2rem,1.2rem+2.6vw,3.25rem)] font-[740]">
         Pertanyaan yang sering diajukan
       </h2>
@@ -33,7 +33,7 @@ const faqs = [
         data-section="faq">{cta.consult}</a
       >
     </div>
-    <div class="border-t border-navy">
+    <div data-reveal-item style="--i:1" class="border-t border-navy">
       {
         faqs.map((item) => (
           <details class="group border-b border-line">

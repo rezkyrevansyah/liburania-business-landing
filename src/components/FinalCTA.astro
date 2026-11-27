@@ -5,8 +5,8 @@ import SectorIcon from './SectorIcon.astro';
 ---
 
 <section id="konsultasi" data-final-cta aria-labelledby="final-title" class="on-dark bg-navy text-white">
-  <div data-reveal class="shell py-20 md:py-28">
-    <div class="max-w-3xl">
+  <div data-reveal="stagger" class="shell py-20 md:py-28">
+    <div data-reveal-item style="--i:0" class="max-w-3xl">
       <p class="text-sm font-bold tracking-[0.08em] text-cyan">
         JELAS HARGANYA. JELAS FITURNYA. JELAS MANFAATNYA.
       </p>
@@ -35,11 +35,15 @@ import SectorIcon from './SectorIcon.astro';
         >
       </div>
     </div>
-    <p class="mt-16 text-xl font-semibold md:mt-20">Pilih paket sesuai jenis usaha Anda</p>
+    <p data-reveal-item style="--i:1" class="mt-16 text-xl font-semibold md:mt-20">Pilih paket sesuai jenis usaha Anda</p>
     <ul class="mt-6 grid gap-5 lg:grid-cols-3">
       {
-        sectors.map((s) => (
-          <li class="flex flex-col rounded-[var(--radius-panel)] border border-white/14 bg-navy-soft p-6 sm:p-7">
+        sectors.map((s, idx) => (
+          <li
+            data-reveal-item="scale"
+            style={`--i:${idx + 2}`}
+            class="flex flex-col rounded-[var(--radius-panel)] border border-white/14 bg-navy-soft p-6 sm:p-7"
+          >
             <span class:list={['inline-flex h-[30px] items-center gap-2 self-start rounded-full pr-3 pl-2.5 text-[0.8125rem] font-bold', sectorTone[s.id].tint, sectorTone[s.id].text]}>
               <SectorIcon id={s.id} class="size-[15px] shrink-0" />
               {s.tab}
